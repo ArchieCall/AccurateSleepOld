@@ -1,7 +1,11 @@
 # AccurateSleep
 A function to more accurately sleep a Julia process.
 
-The present Julia sleep() function has an average error differential of 1.1 milliseconds.  Indeed 30% of sleep() calls exceed 1.5 milliseconds of error.
+The present Julia sleep() function has an average error differential as follows:
+  50% of sleep() calls exceed 1.10 milliseconds of error
+  25% of sleep() calls exceed 1.75 milliseconds of error
+   5% of sleep() calls exceed 1.90 milliseconds of error
+   1% of sleep() calls exceed 2.00 milliseconds of error 
 
 The sleep_ns() enables extremely accurate sleeping a Julia program accurately down to .01 ms, and less if desired.
 
