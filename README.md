@@ -2,6 +2,7 @@
 A function to more accurately sleep a Julia process.
 
 The present Julia sleep() function has an average error differential as follows:
+
   50% of sleep() calls exceed 1.10 milliseconds of error
   25% of sleep() calls exceed 1.75 milliseconds of error
    5% of sleep() calls exceed 1.90 milliseconds of error
