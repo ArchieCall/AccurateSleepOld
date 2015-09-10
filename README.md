@@ -15,10 +15,10 @@ This function works as follows:
 
 The impact of sleep_ns on computer cpu loading is summarized below.
 
-sleep_time   |        cpu load
------------  |        --------
-  .099 secs  |         0.1 %
-  .050 secs  |         0.1 %
+sleep_time   |        cpu load   | mean error
+-----------  |        --------   | ----------
+  .099 secs  |         0.1 %     |  .000003 secs
+  .050 secs  |         0.1 %     |  .000014 secs
   .030 secs  |         0.8 %
   .020 secs  |         1.0 %
   .010 secs  |         3.0 %
