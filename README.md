@@ -9,13 +9,15 @@ The present Julia sleep() function has an average error differential as follows:
 
 The sleep_ns() enables extremely accurate sleeping a Julia program accurately down to .01 ms, and less if desired.
 
-This function works as follows:
+This function works as follows: 
   the concept of burn_time is advanced, where burn_time  is a threshold where 99% of typical sleep() calls fall below this level.  Of course
 
 Why is this not showing?
 
-this is showing okk. hhh
+this is showing okk. hhh a;dffjas;dkffj a;skdjf a;sdkjf a;sd kfjf;a sdjfa;sddfj ;asddkjf 
+;asdjf ;asddjf ;asdjf;askdjf;asdj f;asdjf;a
 
 CPU Loading       sleep_time
-  1.00              .1 %
+  777               888
+  dkdk
   
