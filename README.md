@@ -13,8 +13,8 @@ The sleep_ns() function enables extremely accurate sleeping of a Julia program a
 This function works as follows: 
   the concept of burn_time is advanced, where burn_time  is a threshold where 99% of typical sleep() calls fall below this level.  Of course
 
-Why is this not showing?
 
+The effect on sleep_time on cpu loading is show below:
 sleep_time   |        cpu load
 -----------  |        --------
   .099 secs  |         0.1 %
