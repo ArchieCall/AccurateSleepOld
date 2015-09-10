@@ -17,6 +17,7 @@ Why is this not showing?
 
 sleep_time   |        cpu load
 -----------  |        --------
+  .099 secs  |         0.1 %
   .050 secs  |         0.1 %
   .030 secs  |         0.8 %
   .020 secs  |         1.0 %
