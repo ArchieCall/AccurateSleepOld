@@ -14,6 +14,5 @@ This function works as follows:
 
 Why is this not showing?
 
-CPU Loadings     sleep_time
-------------     ----------
+this is showing okk.
   
