@@ -21,4 +21,11 @@ sleep_time   |        cpu load
   .030 secs  |         0.8 %
   .020 secs  |         1.0 %
   .010 secs  |         3.0 %
+  .008 secs  |         4.0 %
+  .006 secs  |         5.5 %
+  .004 secs  |         8.5 %
+  .003 secs  |        12.0 %
+  .0025 secs |        22.0 %
+  .0023 secs |        29.0 %
+  .0020 secs |        29.0 %
   
