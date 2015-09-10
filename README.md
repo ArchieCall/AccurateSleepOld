@@ -15,6 +15,6 @@ This function works as follows:
 
 Why is this not showing?
 
-sleep_time            sleep_time
+##sleep_time            ##CPU Load
 * 1.00 secs
 * 0.50 secs
