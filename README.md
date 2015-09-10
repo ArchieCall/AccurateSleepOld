@@ -15,7 +15,10 @@ This function works as follows:
 
 Why is this not showing?
 
-sleep_time   |         cpu load
------------  |         --------
-  .050 secs  |          0.1 %
-  .030 secs  |          0.8 %
+sleep_time   |        cpu load
+-----------  |        --------
+  .050 secs  |         0.1 %
+  .030 secs  |         0.8 %
+  .020 secs  |         1.0 %
+  .010 secs  |         3.0 %
+  
