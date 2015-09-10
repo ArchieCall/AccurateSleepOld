@@ -16,6 +16,6 @@ Why is this not showing?
 
 this is showing okk.
 
-===========
-ooooooo
+CPU Loading       sleep_time
+  1.00              .1 %
   
