@@ -3,21 +3,16 @@ A function to more accurately sleep a Julia process.
 
 cdf                    |   sleep() err           | sleep_ns() err           
 ---------------------  |  --------------------   | -------------------
-50.00 %                |  .0015                  |    .0000012
-66.67 %                |  .000                   |  .99
-80.00 %                |  .000                   |  .99
-95.00 %                |  .000                   |  .99
-99.00 %                |  .000                   |  .99
-99.90 %                |  .000                   |  .99
-99.99 %                |  .000                   |  .99
+50.00 %                |  .001681 secs           |  .000001 secs
+66.67 %                |  .001887 secs           |  .000001 secs
+80.00 %                |  .002259 secs           |  .000001 secs
+95.00 %                |  .002022 secs           |  .000002 secs
+99.00 %                |  .002107 secs           |  .000022 secs
+99.90 %                |  .002211 secs           |  .000050 secs
+99.99 %                |  .002430 secs           |  .000085 secs
 
 
-The present Julia sleep() function has an average error differential as follows:
 
-  * 50% of sleep() calls exceed 1.15 milliseconds of error
-  * 25% of sleep() calls exceed 1.75 milliseconds of error
-  * 5% of sleep() calls exceed 1.90 milliseconds of error
-  * 1% of sleep() calls exceed 2.00 milliseconds of error 
 
 The sleep_ns() function enables extremely accurate sleeping of a Julia program accurately down to .000002 seconds.
 
