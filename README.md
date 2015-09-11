@@ -1,8 +1,8 @@
 # AccurateSleep
 
 sleep_ns(sleep_time)
-*A function to block the current task.
-*Parmeter - sleep_time is specified in seconds and must be a floating point between .000001 seconds and 100. seconds.  
+# A function to block the current task.
+# Parmeter - sleep_time is specified in seconds and must be a floating point between .000001 seconds and 100. seconds.  
 
 The sleep_ns() function enables extremely accurate sleeping of a Julia program accurately down to .000002 seconds.
 
