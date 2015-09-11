@@ -1,5 +1,9 @@
 # AccurateSleep
 A function to more accurately sleep a Julia process.
+The sleep_ns() function enables extremely accurate sleeping of a Julia program accurately down to .000002 seconds.
+
+This function works as follows: 
+  the concept of burn_time is advanced, where burn_time  is a threshold where 99% of typical sleep() calls fall below this level.  Of course
 
 cdf                    |   sleep() err           | sleep_ns() err           
 ---------------------  |  --------------------   | -------------------
@@ -14,10 +18,7 @@ cdf                    |   sleep() err           | sleep_ns() err
 
 
 
-The sleep_ns() function enables extremely accurate sleeping of a Julia program accurately down to .000002 seconds.
 
-This function works as follows: 
-  the concept of burn_time is advanced, where burn_time  is a threshold where 99% of typical sleep() calls fall below this level.  Of course
 
 The impact of sleep_ns on computer cpu loading is summarized below.
 
