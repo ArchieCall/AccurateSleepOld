@@ -1,6 +1,6 @@
 # AccurateSleep
 
-sleep_ns(sleep_time)  A function to block the current task.
+sleep_ns(sleep_time)  -     A function to block the current task.
 
                       Parmater - sleep_time is specified in seconds and must be a floating point between .000001 seconds and 100. seconds.  
 
