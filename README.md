@@ -1,8 +1,7 @@
 # AccurateSleep
 A function to more accurately sleep a Julia process.
 
-cumulative percent     |  sleep()                | sleep_ns()           
-                       |   error rate            | error rate
+cumulative percent     |   sleep() error         | sleep_ns() error           
 ---------------------  |  --------------------   | -------------------
 50%                    |  .0015                  |    .0000012
 25%                    |  .000                   |  .99
