@@ -5,6 +5,9 @@ cumulative percent     |  sleep() error rate     | sleep_ns() error rate
 ---------------------  |  --------------------   | -------------------
 50%                    |  .0015                  |    .0000012
 25%                    |  .000                   |  .99
+1%                     |  .030                   |  .00014
+.1%                    |  .0005 seconds          | .00001 seconds
+.01%                   |  .00045                 | .88888 seconds
 
 The present Julia sleep() function has an average error differential as follows:
 
