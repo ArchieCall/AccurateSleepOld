@@ -1,13 +1,16 @@
 # AccurateSleep
 A function to more accurately sleep a Julia process.
 
-cumulative percent     |   sleep() error         | sleep_ns() error           
+cdf                    |   sleep() err           | sleep_ns() err           
 ---------------------  |  --------------------   | -------------------
-50%                    |  .0015                  |    .0000012
-25%                    |  .000                   |  .99
-1%                     |  .030                   |  .00014
-.1%                    |  .0005 seconds          | .00001 seconds
-.01%                   |  .00045                 | .88888 seconds
+50.00 %                |  .0015                  |    .0000012
+66.67 %                |  .000                   |  .99
+80.00 %                |  .000                   |  .99
+95.00 %                |  .000                   |  .99
+99.00 %                |  .000                   |  .99
+99.90 %                |  .000                   |  .99
+99.99 %                |  .000                   |  .99
+
 
 The present Julia sleep() function has an average error differential as follows:
 
