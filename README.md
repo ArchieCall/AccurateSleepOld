@@ -1,5 +1,7 @@
 # AccurateSleep
-A function to more accurately sleep a Julia process.
+
+sleep_ns() - function to very accurately sleep a Julia process.
+
 The sleep_ns() function enables extremely accurate sleeping of a Julia program accurately down to .000002 seconds.
 
 This function works as follows: 
