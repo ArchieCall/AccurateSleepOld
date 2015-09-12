@@ -11,7 +11,14 @@ This function is a hybrid solution that works as follows:
   * I examined the output of sleep()
   * the actual sleep time was always greater than the specified time
   * the average error of the sleep was about .00150 second
-  * 99% of the errors were less than .00230 seconds
+  * 99+% of the errors were found to be less than .00230 seconds
+  * a constant called burn_time is set to .00230 seconds
+  * let us take a specific sleep_time say .00800 seconds
+  * the call to the function is:  sleep_ns(.00800)
+  * the function now subtracts off the burn_time yielding a partial_sleep_time of .00570 seconds
+  * a nano second time is taken with time_ns() : this time is put in var nano1
+  * sleep itself is called with:  sleep(partial_sleep_time)
+  * when this sleep is done
 
 cdf                    |   sleep() err           | sleep_ns() err           
 ---------------------  |  --------------------   | -------------------
