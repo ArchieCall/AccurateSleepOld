@@ -5,10 +5,13 @@
 * sleep_time must be a floating point number between .000001 seconds and 100. seconds.
 * sleep_ns() is very similiar to the normal Julia sleep() function, albeit with more accuracy.
 
-The sleep_ns() function enables extremely accurate sleeping of a Julia program accurately down to .000002 seconds.
+The sleep_ns() function enables extremely accurate sleeping of a Julia program accurately down to .000005 seconds.
 
-This function works as follows: 
-  the concept of burn_time is advanced, where burn_time  is a threshold where 99% of typical sleep() calls fall below this level.  Of course
+This function is a hybrid solution that works as follows: 
+  * I examined the output of sleep()
+  * the actual sleep time was always greater than the specified time
+  * the average error of the sleep was about .00150 second
+  * 99% of the errors were less than .00230 seconds
 
 cdf                    |   sleep() err           | sleep_ns() err           
 ---------------------  |  --------------------   | -------------------
