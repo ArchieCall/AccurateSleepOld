@@ -72,7 +72,7 @@ sleep_time   |        cpu load
   .0020 secs |        29.0 %
   
   
- ###The AccurateSleep.jl is comprised of the following:###
+ ***The AccurateSleep.jl is comprised of the following:***
  * module NewSleep
  * module Mainline
  * 
