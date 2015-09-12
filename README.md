@@ -22,8 +22,15 @@
   * in this scenario, the regular Julia sleep() function is not up to the task, while sleep_ns() should handle it with ease
 * ***toy example involving Nascar and high speed restrictor plate racing***
   * Nascar has for years used restrictor plates on high banked 2.5 mile tracks as a method of keeping maximum speeds down
-  * the restrictor plates make the cars all about equal in power and the vaccum effect at high speeds sucks all the cars up tight
-  * dkdkdk
+  * the restrictor plates make the cars all about equal in power, thus the vaccum effect at high speeds sucks all the cars up tight to each other
+  * the drivers do not have to lift on the throttle all around the track
+  * boring racing is the consequence until the big accident happens and 15 cars are demolished in the mishap
+  * Nascar decides to eliminate restrictor plates and go with two automatic slow down zones on the track
+  * these zones work as follows:
+    * as the cars approach the slow down zone, on board Linux computers in each of the 43 racing cars begins to automatically apply the brakes to slow the cars down whereup they enter the slow down zone at exactly 158 mph
+    * the driver can apply the throttle or brakes in the slow down zone, but they will not allow the car to go faster than 158 mph
+    * when the car exits the slow down zone all automatic control of braking and speed is eliminated
+    * the cars now act like they are on a 1 mile medium speed track and regular racing is possible
 
 
 -------------
