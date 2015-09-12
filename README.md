@@ -74,6 +74,9 @@ sleep_time   |        cpu load
   
  ***The AccurateSleep.jl is comprised of the following:***
  * module NewSleep
+   * sleep_ns() function
+   * simple_compare() function
+   * comparison_report() function
  * module Mainline
  * 
 
