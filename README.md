@@ -13,6 +13,9 @@
 * sleep_ns() has and average error rate of .000001 seconds, and 5% of the errors only exceed .000002 seconds
 
 
+-------------
+
+
 ***Function sleep_ns() is a hybrid solution that works as follows:*** 
   * the actual sleep time of sleep() was examined
   * the actual time was always greater than the specified time
