@@ -1,5 +1,9 @@
 **AccurateSleep**
 
+
+monkey see monkey do  
+uuuu
+
 ***sleep_ns(sleep_time)***
 * A function to block the current task (i.e. sleep) for the specified number of seconds.
 * sleep_time must be a floating point number between .000005 seconds and 100. seconds.
@@ -80,7 +84,7 @@ sleep_time   |        cpu load
    * simple_compare() function
    * comparison_report() function
  * module Mainline
-   * import NewSleep.sleep_ns     444
+   * import NewSleep.sleep_ns
    * import NewSleep.simple_compare
    * import NewSleep.comparison_report
    * runs all sorts of sample sleep stuff to show sleep_ns in action
