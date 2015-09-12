@@ -1,4 +1,4 @@
-*AccurateSleep*
+**AccurateSleep**
 
 ***sleep_ns(sleep_time)***
 * A function to block the current task (i.e. sleep) for the specified number of seconds.
