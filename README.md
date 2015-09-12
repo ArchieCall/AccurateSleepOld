@@ -1,7 +1,7 @@
 ## sleep_ns(sleep_time)
 * A function to block the current task (i.e. sleep) for the specified number of seconds.
 * sleep_time must be a floating point number between .000005 seconds and 100.0 seconds.
-* sleep_ns() is very similiar to the normal Julia sleep() function, albeit with much accuracy.
+* sleep_ns() is very similiar to the normal Julia sleep() function, albeit with much more accuracy.
 
 
 -----------
@@ -20,6 +20,10 @@
   * in emergency_mode the computer recommends appropriate actions to alleviate the anomoly
   * who cares if the computer is using 29% of its resources while dealing with the anomoly
   * in this scenario, the regular Julia sleep() function is not up to the task, while sleep_ns() should handle it with ease
+* ***toy example involving attempts by Nascar to make interesting racing on high speed restrictor plate tracks***
+  * Nascar has for years used restrictor plates on high banked 2.5 mile tracks as a method of keeping maximum speeds down
+  * the restrictor plates make the cars all about equal in power and the vaccum effect at high speeds sucks all the cars up tight
+  * dkdkdk
 
 
 -------------
