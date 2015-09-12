@@ -31,7 +31,7 @@
 * on my Windows 10 Core i5 laptop running Julia 3.11, I found that the burn cycle maxed out at 29% CPU loading
   * the 29% loading on my computer is predicated on the number of cores and the standard setting on Windows 10
   * if the Affinity and Priority were revised for sleep_ns(), then the loading could be mitigated
-  * I'm not familiar with how Linux handles such matter, but anything that throttles a process could be of benefit
+  * I'm not familiar with how Linux handles such matter, but anything that throttles a process would be of benefit
 * the burn_time threshold of .00230 seconds defines where burning is 100% of the time
 * the greater the sleep_time in relation to burn_time the less the impact on loading
 * for example, at sleep_time = .00800 seconds, the impact on cpu loading is 4%, while at .00400 seconds the loading is 12%
