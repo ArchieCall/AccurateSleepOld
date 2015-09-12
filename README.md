@@ -1,13 +1,16 @@
 **AccurateSleep**
 
-
-monkey see monkey do  
-uuuu fkfkfkfkfk
-
 ***sleep_ns(sleep_time)***
 * A function to block the current task (i.e. sleep) for the specified number of seconds.
 * sleep_time must be a floating point number between .000005 seconds and 100. seconds.
 * sleep_ns() is very similiar to the normal Julia sleep() function, albeit with more accuracy.
+
+
+***Use cases***
+* use sleep_ns() whenever sleep() is not accurate enough for your purposes
+* for example, sleep() has an average error of 1.15 milliseconds and %5 of the errors exceed 2.2 milliseconds
+* sleep_ns() has and average error rate of .000001 seconds, and 5% of the errors only exceed .000002 seconds
+
 
 ***Function sleep_ns() is a hybrid solution that works as follows:*** 
   * the actual sleep time of sleep() was examined
