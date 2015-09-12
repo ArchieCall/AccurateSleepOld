@@ -7,7 +7,7 @@
 
 The sleep_ns() function enables extremely accurate sleeping of a Julia program accurately down to .000005 seconds.
 
-Function sleep_ns() is a hybrid solution that works as follows: 
+***Function sleep_ns() is a hybrid solution that works as follows:*** 
   * the actual sleep time of sleep() was examined
   * the actual time was always greater than the specified time
   * the average error of the sleep was about .00150 second
@@ -27,7 +27,7 @@ Function sleep_ns() is a hybrid solution that works as follows:
   * the time delta is put in the return statement
   * 
   
-CPU loading when using sleep_ns
+***CPU loading when using sleep_ns***
 * cool and the gang
 * dkdkdk
 * 
