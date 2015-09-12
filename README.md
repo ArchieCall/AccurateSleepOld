@@ -31,7 +31,9 @@
   * the 29% loading on my computer is predicated on the number of cores and the standard setting on Windows 10
   * if the Affinity and Priority were revised for sleep_ns(), then the loading might be mitigated somewhat
   * I'm not familiar with how Linux handles such matters, but anything that throttles a process would be of benefit
-* the burn_time threshold of .00230 seconds defines where burning is 100% of the time
+* the burn_time threshold of .00230 seconds defines where burning begins
+* if the sleep_time is less than .00230, then burning applies all the time
+* if the sleep_time is greater than .00230, then the sleep is a hybrid of sleep and burn
 * the greater the sleep_time in relation to burn_time the less the impact on loading
 * for example, at sleep_time = .00800 seconds, the impact on cpu loading is 4%, while at .00400 seconds the loading is 12%
 * 
