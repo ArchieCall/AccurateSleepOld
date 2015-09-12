@@ -34,7 +34,10 @@ The sleep_ns() function enables extremely accurate sleeping of a Julia program a
   * the 29% loading on my computer is predicated on the number of cores and the standard setting on Windows 10
   * if the Affinity and Priority were revised for sleep_ns(), then the loading could be mitigated
   * I'm not familiar with how Linux handles such matter, but anything that throttles a process could be of benefit
-* dkdkdk
+* the burn_time threshold of .00230 seconds defines where burning is 100% of the time
+* the greater the sleep_time in relation to burn_time the less the impact on loading
+* for example, at sleep_time = .00800 seconds, the impact on cpu loading is 4%, while at .00400 seconds the loading is 12%
+* 
 
 
 cdf                    |   sleep() err           | sleep_ns() err           
