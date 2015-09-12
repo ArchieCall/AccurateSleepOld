@@ -22,8 +22,7 @@
   * if the elapsed time is less than .00800 then a burn cycle is required
   * the burn cycle is a simple while loop that takes a second time_ns() called nano2
   * in the while loop when nano2 equals or exceeds nanofinal, then sleep_ns() is done
-  * the time delta is put in the return statement
-  * 
+  * the time delta is put in the return statement  * 
   
 ***CPU loading when using sleep_ns***
 * the sleep(partial_sleep_time) portion of sleep_ns() has zero impact on loading
