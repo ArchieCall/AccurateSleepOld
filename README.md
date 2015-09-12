@@ -18,7 +18,11 @@ This function is a hybrid solution that works as follows:
   * the function now subtracts off the burn_time yielding a partial_sleep_time of .00570 seconds
   * a nano second time taken with time_ns() is put in var nano1
   * sleep itself is called with:  sleep(partial_sleep_time)
-  * when this sleep is done
+  * when this sleep is done the actual time elapsed will almost always be between .00570 seconds and .00800 seconds
+  * if the elapsed time is greater than or = to .00800 then the sleep_ns() is done
+  * if the elapsed time is less than .00800 then a burn cycle is required
+  * the burn cycle is a simple while loop that takes a second time_ns() called nano2
+  * 
 
 cdf                    |   sleep() err           | sleep_ns() err           
 ---------------------  |  --------------------   | -------------------
