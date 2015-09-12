@@ -31,7 +31,7 @@ The sleep_ns() function enables extremely accurate sleeping of a Julia program a
 * the sleep(partial_sleep_time) portion of sleep_ns() has zero impact on loading
 * the burn cycle of sleep_ns() has an impact on cpu loading
 * on my Windows 10 Core i5 laptop running Julia 3.11, I found that the burn cycle maxed out at 29% CPU loading
-  *dkdk
+  * djdjdj
 
 
 cdf                    |   sleep() err           | sleep_ns() err           
