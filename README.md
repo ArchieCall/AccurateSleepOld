@@ -80,10 +80,11 @@ sleep_time   |        cpu load
    * simple_compare() function
    * comparison_report() function
  * module Mainline
-   * import NewSleep.sleep_ns    
+   * import NewSleep.sleep_ns     #this should be spaced over
    * import NewSleep.simple_compare
    * import NewSleep.comparison_report
    * runs all sorts of sample sleep stuff to show sleep_ns in action
+ * 
 
 ***The sleep_ns.jl file is comprised of:***
 * sleep_ns()   #--- just the sleep_ns() ready to cut a paste into your app
