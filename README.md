@@ -4,6 +4,7 @@
 * sleep_ns() is very similiar to the normal Julia sleep() function, albeit with more accuracy.
 
 
+
 ***Use cases***
 * use sleep_ns() whenever sleep() is not accurate enough for your purposes
 * for example, sleep() has an average error of 1.15 milliseconds and %5 of the errors exceed 2.2 milliseconds
