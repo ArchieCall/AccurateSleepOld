@@ -11,7 +11,7 @@
 * use sleep_ns() whenever sleep() is not accurate enough for your purposes
 * for example, sleep() has an average error of 1.15 milliseconds and %5 of the errors exceed 2.2 milliseconds
 * in contrast sleep_ns() has and average error rate of .000001 seconds, and 5% of the errors only exceed .000002 seconds
-* ** toy hypothetical example is as follows:**
+* ***toy hypothetical example is as follows:***
   * you have a light weight drone with an onboard computer running Linux and Julia
   * Julia is monitoring various sub systems such as: ailerons, elevator, pitch, air speed, rotation, etc.
   * as Julia monitors the subsystems exactly every .01 of a second, it checks for a healthy system
