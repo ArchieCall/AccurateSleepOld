@@ -7,21 +7,24 @@
 
 The sleep_ns() function enables extremely accurate sleeping of a Julia program accurately down to .000005 seconds.
 
-This function is a hybrid solution that works as follows: 
+Function sleep_ns() is a hybrid solution that works as follows: 
   * I examined the output of sleep()
   * the actual sleep time was always greater than the specified time
   * the average error of the sleep was about .00150 second
   * 99+% of the errors were found to be less than .00230 seconds
   * a constant called burn_time is set to .00230 seconds
-  * let us take a specific sleep_time say .00800 seconds
+  * let us sample a specific sleep_time say .00800 seconds
   * the call to the function is:  sleep_ns(.00800)
   * the function now subtracts off the burn_time yielding a partial_sleep_time of .00570 seconds
   * a nano second time taken with time_ns() is put in var nano1
+  * a new var called nano_final is computed to be nano1 + (sleep_time * 1_000_000_000)
   * sleep itself is called with:  sleep(partial_sleep_time)
   * when this sleep is done the actual time elapsed will almost always be between .00570 seconds and .00800 seconds
-  * if the elapsed time is greater than or = to .00800 then the sleep_ns() is done
+  * if the elapsed time is greater than or = to .00800, then sleep_ns() is done
   * if the elapsed time is less than .00800 then a burn cycle is required
   * the burn cycle is a simple while loop that takes a second time_ns() called nano2
+  * in the while loop when nano2 equals or exceeds nanofinal, then sleep_ns() is done
+  * the time delta is put in the return statement
   * 
 
 cdf                    |   sleep() err           | sleep_ns() err           
