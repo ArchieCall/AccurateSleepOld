@@ -22,15 +22,15 @@
   * if the elapsed time is less than .00800 then a burn cycle is required
   * the burn cycle is a simple while loop that takes a second time_ns() called nano2
   * in the while loop when nano2 equals or exceeds nanofinal, then sleep_ns() is done
-  * the time delta is put in the return statement  * 
+  * delta returned in the return statement 
   
 ***CPU loading when using sleep_ns***
 * the sleep(partial_sleep_time) portion of sleep_ns() has zero impact on loading
 * the burn cycle of sleep_ns() has an impact on cpu loading
 * on my Windows 10 Core i5 laptop running Julia 3.11, I found that the burn cycle maxed out at 29% CPU loading
   * the 29% loading on my computer is predicated on the number of cores and the standard setting on Windows 10
-  * if the Affinity and Priority were revised for sleep_ns(), then the loading could be mitigated
-  * I'm not familiar with how Linux handles such matter, but anything that throttles a process would be of benefit
+  * if the Affinity and Priority were revised for sleep_ns(), then the loading might be mitigated somewhat
+  * I'm not familiar with how Linux handles such matters, but anything that throttles a process would be of benefit
 * the burn_time threshold of .00230 seconds defines where burning is 100% of the time
 * the greater the sleep_time in relation to burn_time the less the impact on loading
 * for example, at sleep_time = .00800 seconds, the impact on cpu loading is 4%, while at .00400 seconds the loading is 12%
