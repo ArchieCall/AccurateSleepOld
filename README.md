@@ -2,7 +2,7 @@
 
 ***sleep_ns(sleep_time)***
 * A function to block the current task (i.e. sleep) for the specified number of seconds.
-* sleep_time must be a floating point number between .000001 seconds and 100. seconds.
+* sleep_time must be a floating point number between .000005 seconds and 100. seconds.
 * sleep_ns() is very similiar to the normal Julia sleep() function, albeit with more accuracy.
 
 ***Function sleep_ns() is a hybrid solution that works as follows:*** 
@@ -70,4 +70,9 @@ sleep_time   |        cpu load
   .0025 secs |        22.0 %
   .0023 secs |        29.0 %
   .0020 secs |        29.0 %
+  
+  The AccurateSleep.jl is comprised of the following:
+  * module NewSleep
+  * module Mainline
+  * 
   
