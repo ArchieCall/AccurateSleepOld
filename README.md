@@ -1,5 +1,5 @@
 ## sleep_ns(sleep_time)
-* A function that blocks the current task (i.e. sleeping) for the specified number of seconds.
+* A function that blocks the current task (i.e. sleeps) for the specified number of seconds.
 * The sleep_time parameter must be a floating point number between .000005 seconds and 100.0 seconds.
 * sleep_ns() is very similiar to the normal Julia sleep() function, albeit with much improved accuracy.
 
@@ -7,8 +7,9 @@
 -----------
 
 
-cdf                    |   sleep() err           | sleep_ns() err           
+Cum. Density Func      |   sleep() error         | sleep_ns() error           
 ---------------------  |  --------------------   | -------------------
+25.00 %                |  .008000 secs           |  .000001 secs
 50.00 %                |  .001681 secs           |  .000001 secs
 66.67 %                |  .001887 secs           |  .000001 secs
 80.00 %                |  .002259 secs           |  .000001 secs
@@ -16,11 +17,6 @@ cdf                    |   sleep() err           | sleep_ns() err
 99.00 %                |  .002107 secs           |  .000022 secs
 99.90 %                |  .002211 secs           |  .000050 secs
 99.99 %                |  .002430 secs           |  .000085 secs
-
-
-
-
-
 
 
 ***Use cases***
