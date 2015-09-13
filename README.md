@@ -1,5 +1,5 @@
 ## sleep_ns(sleep_time)
-* A function to block the current task (i.e. sleep) for the specified number of seconds.
+* A function that blocks the current task (i.e. sleep) for the specified number of seconds.
 * sleep_time must be a floating point number between .000005 seconds and 100.0 seconds.
 * sleep_ns() is very similiar to the normal Julia sleep() function, albeit with much more accuracy.
 
@@ -9,8 +9,16 @@
 
 ***Use cases***
 * use sleep_ns() whenever sleep() is not accurate enough for your purposes
-* for example, sleep() has an average error of 1.15 milliseconds and %5 of the errors exceed 2.2 milliseconds
-* in contrast sleep_ns() has and average error rate of .000001 seconds, and 5% of the errors only exceed .000002 seconds
+* sleep() has an average error of .001150 seconds, with 5% of the errors exceeding .002100 seconds
+* sleep_ns() has and average error rate of .000001 seconds, with 5% of the errors exceeding .000002 seconds
+* any application where a process must start and end on a precise schedule is suitable for sleep_ns()
+* for example
+  * desire some process to run exactly .080000 seconds
+  * start of process
+  * beg_time = time_ns()
+  * process code is here
+  * int_time = time_ns()
+  * 
 * ***toy hypothetical example is as follows:***
   * you have a light weight drone with an onboard computer running Linux and Julia
   * Julia is monitoring various sub systems such as: ailerons, elevator, pitch, air speed, rotation, etc.
