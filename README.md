@@ -20,27 +20,7 @@
   * int_time = time_ns()
   * 
   * 
-* ***toy hypothetical example is as follows:***
-  * you have a light weight drone with an onboard computer running Linux and Julia
-  * Julia is monitoring various sub systems such as: ailerons, elevator, pitch, air speed, rotation, etc.
-  * as Julia monitors the subsystems exactly every .01 of a second, it checks for a healthy system
-  * while healthy, it is recording the information to a hard drive
-  * if it detect an anomoly, it switches to emergency_mode where these systems are now monitored every .00001 seconds
-  * in emergency_mode the computer recommends appropriate actions to alleviate the anomoly
-  * who cares if the computer is using 29% of its resources while dealing with the anomoly
-  * in this scenario, the regular Julia sleep() function is not up to the task, while sleep_ns() should handle it with ease
-* ***toy example involving Nascar and high speed restrictor plate racing***
-  * Nascar has for years used restrictor plates on high banked 2.5 mile tracks as a method of keeping maximum speeds down
-  * the restrictor plates make the cars all about equal in power, thus the vaccum effect at high speeds sucks all the cars up tight to each other
-  * the drivers do not have to lift on the throttle all around the track
-  * boring racing is the consequence until the big accident happens and 15 cars are demolished in the mishap
-  * Nascar decides to eliminate restrictor plates and go with two automatic slow down zones on the track
-  * these zones work as follows:
-    * as the cars approach the slow down zone, on board Linux computers in each of the 43 racing cars begins to automatically apply the brakes to slow the cars down whereup they enter the slow down zone at exactly 158 mph
-    * the driver can apply the throttle or brakes in the slow down zone, but they will not allow the car to go faster than 158 mph
-    * when the car exits the slow down zone all automatic control of braking and speed is eliminated
-    * the cars now act like they are on a 1 mile medium speed track and regular racing is possible
-
+* 
 
 -------------
 
