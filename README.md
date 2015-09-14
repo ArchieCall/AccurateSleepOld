@@ -22,6 +22,11 @@ statistic              |  sleep(.005)            |   sleep_ns(.005)
 :----------:           |  :----------:           |   :---------:
 Mean sleep             |  .006366 secs           |   .005001 secs
 Max sleep              |  .008201 secs           |   .005233 secs
+stdddatistic           |  sleep(.005)            |   sleep_ns(.005)
+:----------:           |  :----------:           |   :---------:
+Mean sleep             |  .006366 secs           |   .005001 secs
+Max sleep              |  .008201 secs           |   .005233 secs
+
 
 ----------
 
