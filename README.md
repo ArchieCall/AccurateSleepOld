@@ -19,6 +19,8 @@ CDF 99.90 %            |  .002197 secs           |  .000165 secs
 CDF 99.99 %            |  .003201 secs           |  .000233 secs
 Mean sleep             |  .006366 secs           |  .005001 secs
 Maximum sleep          |  .008201 secs           |  .005233 secs
+Minimum sleep          |  .006366 secs           |  .005001 secs
+Mean sleep diff        |  .008201 secs           |  .005233 secs
 
 
 ----------
