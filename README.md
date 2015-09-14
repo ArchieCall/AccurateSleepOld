@@ -6,7 +6,7 @@
 
 -----------
 ***Table below generated for 6,000 samples:  `   ` sleep(.005)  vs.  sleep_ns(.005)***
-* diff => ***sleep(.005) - .005*** , or ***sleep_ns(.005) - .005***
+* **diff** => ***sleep(.005) - .005*** , or ***sleep_ns(.005) - .005***
 * **CDF** => cumulative density function of diff 
 
   Statistic            |   sleep(.005)           | sleep_ns(.005)                 
