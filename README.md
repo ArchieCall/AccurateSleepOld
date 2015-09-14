@@ -6,9 +6,9 @@
 
 -----------
 ***Table below generated for 6,000 samples:  `   ` sleep(.005)  vs.  sleep_ns(.005)***
-* **CDF** => cumulative density function; `  `**Error** => sleep(.005) - .005 , or sleep_ns(.005)
+* **CDF** => cumulative density function of differential `  `sleep(.005) - .005 , or sleep_ns(.005)
 
-  Statistic            |   sleep(.005) Error     | sleep_ns(.005) Error           
+  Statistic            |   sleep(.005)           | sleep_ns(.005)                 
 :-------------------:  |  :-------------------:  | :-----------------:
 CDF 20.00 %            |  .001046 secs           |  .000001 secs
 CDF 50.00 %            |  .001495 secs           |  .000001 secs
@@ -17,8 +17,8 @@ CDF 95.00 %            |  .002020 secs           |  .000001 secs
 CDF 99.00 %            |  .002121 secs           |  .000023 secs
 CDF 99.90 %            |  .002197 secs           |  .000165 secs
 CDF 99.99 %            |  .003201 secs           |  .000233 secs
-Mean sleep             |  .006366 secs           |   .005001 secs
-Maximum sleep          |  .008201 secs           |   .005233 secs
+Mean sleep             |  .006366 secs           |  .005001 secs
+Maximum sleep          |  .008201 secs           |  .005233 secs
 
 
 ----------
