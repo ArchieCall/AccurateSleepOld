@@ -6,8 +6,7 @@
 
 -----------
 ***Table below generated for 6,000 samples:  `   ` sleep(.005)  vs.  sleep_ns(.005)***
-
-**CDF** => cumulative density function; `  `**Error** => sleep(.005) - .005 , or sleep_ns(.005)
+* **CDF** => cumulative density function; `  `**Error** => sleep(.005) - .005 , or sleep_ns(.005)
 
   Statistic            |   sleep(.005) Error     | sleep_ns(.005) Error           
 :-------------------:  |  :-------------------:  | :-----------------:
