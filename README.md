@@ -5,11 +5,11 @@
 
 
 -----------
-***Table below highlights errors:  sleep()  vs.  sleep_ns()***
+***Table below highlights errors:  sleep(.005)  vs.  sleep_ns(..5)  [10000 samples]***
 
-Cum. Density Func      |   sleep() error         | sleep_ns() error           
+Cum. Density Func      |   sleep(.005) error         | sleep_ns(.005) error           
 :-------------------:  |  :-------------------:  | :-----------------:
-25.00 %                |  .000800 secs           |  .000001 secs
+20.00 %                |  .000800 secs           |  .000001 secs
 50.00 %                |  .001681 secs           |  .000001 secs
 66.67 %                |  .001887 secs           |  .000001 secs
 80.00 %                |  .002259 secs           |  .000001 secs
