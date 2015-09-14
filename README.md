@@ -5,7 +5,7 @@
 
 
 -----------
-***Table below for 10,000 samples:  sleep(.005)  vs.  sleep_ns(.005)***
+***Tables below for 6,000 samples:  sleep(.005)  vs.  sleep_ns(.005)***
 
 Cum. Density Func      |   sleep(.005) error     | sleep_ns(.005) error           
 :-------------------:  |  :-------------------:  | :-----------------:
@@ -17,6 +17,13 @@ Cum. Density Func      |   sleep(.005) error     | sleep_ns(.005) error
 99.00 %                |  .002121 secs           |  .000023 secs
 99.90 %                |  .002197 secs           |  .000165 secs
 99.99 %                |  .003201 secs           |  .000233 secs
+
+statistic              |  sleep(.005)            |   sleep_ns(.005)
+:----------:           |  :----------:           |   :---------:
+Mean sleep             |  .006366 secs           |   .005001 secs
+Max sleep              |  .008201 secs           |   .005233 secs
+
+----------
 
 
 some code below
