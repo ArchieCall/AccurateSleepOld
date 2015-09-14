@@ -8,7 +8,7 @@
 ***Table below highlights errors:  sleep()  vs.  sleep_ns()***
 
 Cum. Density Func      |   sleep() error         | sleep_ns() error           
-:-------------------:  |  --------------------   | -------------------
+:-------------------:  |  :-------------------:  | :-----------------:
 25.00 %                |  .000800 secs           |  .000001 secs
 50.00 %                |  .001681 secs           |  .000001 secs
 66.67 %                |  .001887 secs           |  .000001 secs
