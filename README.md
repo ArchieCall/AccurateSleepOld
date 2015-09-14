@@ -5,7 +5,7 @@
 
 
 -----------
-
+Table below highlights errors:  sleep()  vs.  sleep_ns()
 
 Cum. Density Func      |   sleep() error         | sleep_ns() error           
 :-------------------:  |  --------------------   | -------------------
