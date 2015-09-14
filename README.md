@@ -7,25 +7,17 @@
 -----------
 ***Tables below for 6,000 samples:  sleep(.005)  vs.  sleep_ns(.005)***
 
-Cum. Density Func      |   sleep(.005) error     | sleep_ns(.005) error           
+  Statistic            |   sleep(.005) error     | sleep_ns(.005) error           
 :-------------------:  |  :-------------------:  | :-----------------:
-20.00 %                |  .001046 secs           |  .000001 secs
-50.00 %                |  .001196 secs           |  .000001 secs
-66.67 %                |  .001495 secs           |  .000001 secs
-80.00 %                |  .001801 secs           |  .000001 secs
-95.00 %                |  .002020 secs           |  .000001 secs
-99.00 %                |  .002121 secs           |  .000023 secs
-99.90 %                |  .002197 secs           |  .000165 secs
-99.99 %                |  .003201 secs           |  .000233 secs
-
-statistic              |  sleep(.005)            |   sleep_ns(.005)
-:----------:           |  :----------:           |   :---------:
+CDF 20.00 %            |  .001046 secs           |  .000001 secs
+CDF 50.00 %            |  .001495 secs           |  .000001 secs
+CDF 80.00 %            |  .001801 secs           |  .000001 secs
+CDF 95.00 %            |  .002020 secs           |  .000001 secs
+CDF 99.00 %            |  .002121 secs           |  .000023 secs
+CDF 99.90 %            |  .002197 secs           |  .000165 secs
+CDF 99.99 %            |  .003201 secs           |  .000233 secs
 Mean sleep             |  .006366 secs           |   .005001 secs
-Max sleep              |  .008201 secs           |   .005233 secs
-stdddatistic           |  sleep(.005)            |   sleep_ns(.005)
-:----------:           |  :----------:           |   :---------:
-Mean sleep             |  .006366 secs           |   .005001 secs
-Max sleep              |  .008201 secs           |   .005233 secs
+Maximum sleep          |  .008201 secs           |   .005233 secs
 
 
 ----------
