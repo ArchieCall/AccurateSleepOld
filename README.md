@@ -3,8 +3,11 @@
 * The sleep_time parameter must be a floating point number between .000005 seconds and 100.0 seconds.
 * sleep_ns() is very similiar to the normal Julia sleep() function, albeit with much improved accuracy.
 * sleep_ns() has and average error rate of .000001 seconds, with 5% of the errors exceeding .000002 seconds
-* sleep() has an average error of .001150 seconds, with 5% of the errors exceeding .002100 seconds
-* 
+* in contrast, sleep() has an average error of .001150 seconds, with 5% of the errors exceeding .002100 seconds
+
+***Installation***
+* Method A: Copy and paste the code in file "sleep_ns.jl"
+* Method B: Copy and paste the code from file "AccurateSleep.jl"
 
 
 
