@@ -1,7 +1,7 @@
 ## sleep_ns(sleep_time)
-* function that blocks the current task (i.e. sleeps) for the specified number of seconds.
+* function that blocks the current task (i.e. sleeps) for the specified number of sleep_time seconds.
 * sleep_ns() is very similiar to the normal Julia sleep() function, albeit with much improved accuracy.
-* sleep_ns() has an average error rate of .000001 seconds, with 5% of the errors exceeding .000002 seconds
+* sleep_ns() has an average error rate of .000001 seconds, with only 5% of the errors exceeding .000002 seconds
 * in contrast, sleep() has an average error of .001150 seconds, with 5% of the errors exceeding .002100 seconds
 
 ***Installation***
