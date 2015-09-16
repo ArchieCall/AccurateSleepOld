@@ -44,15 +44,13 @@ uuu
 
 ***Use cases***
 * use sleep_ns() whenever sleep() is not accurate enough for your purposes
-* sleep() has an average error of .001150 seconds, with 5% of the errors exceeding .002100 seconds
-* sleep_ns() has and average error rate of .000001 seconds, with 5% of the errors exceeding .000002 seconds
 * any application where a process must start and end on a precise schedule is suitable for sleep_ns()
 * for example
   * desire some process to run exactly .080000 seconds
   * start of process
-  * beg_time = time_ns()
-  * process code is here
-  * int_time = time_ns()
+  * beg_nano = time_ns()
+  * some intermediate code is here
+  * int_nano = time_ns()
   * 
   * 
 * 
