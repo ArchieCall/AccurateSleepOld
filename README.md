@@ -6,6 +6,10 @@
 
 ***Installation***
 * Method A: Copy and paste the code in file "sleep_ns.jl"
+```
+dkdkdk
+dkdkdk
+```
 * Method B: Copy and paste the code from file "AccurateSleep.jl"
 
 
