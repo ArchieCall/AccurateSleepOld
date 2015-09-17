@@ -130,3 +130,9 @@ sleep_time   |        cpu load
 
 ***The sleep_ns.jl file is comprised of:***
 * sleep_ns()   #--- just the sleep_ns() ready to cut a paste into your app
+* 
+
+***To-Do***
+* learn GitHub commands
+* create a Julia package for AccurateSleep
+* investigate C instructions that are NOP and take up time but not CPU load
