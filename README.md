@@ -11,11 +11,16 @@
 #-- the contents are the totality of the sleep_ns() function
 
 sleep_ns(.05)  #-- warm up sleep_ns
-sleep_ns(.05)  #-- sleep acurately for .05 seconds
+sleep_ns(.05)  #-- sleep accurately for .05 seconds
 
 wanted_sleep = .002
 actual_sleep = sleep_ns(wanted_sleep)
 @show(wanted_sleep, actual_sleep)
+
+#=  this is the output of above @show command
+wanted_sleep => 0.002
+actual_sleep => 0.002000409
+=#
 
 ```
 * Method B: Copy and paste the code from file "AccurateSleep.jl"
