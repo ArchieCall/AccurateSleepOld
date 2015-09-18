@@ -23,14 +23,14 @@ actual_sleep => 0.002000409
 =#
 
 ```
-* Method B: Copy and paste the code from file "AccurateSleep.jl"
+* Method B: Download the file "AccurateSleep.jl"
 ```julia
 #-- download the file AccurateSleep.jl to your local computer
 
 #-- the instruction below will run the demo application
 include("c:\\ArchieJulia\\AccurateSleep.jl")  #-- revise the file location specific to your Julia installation
 
-#-- the output from should be similar to the SampleOutput folder on GitHub
+#-- the output should be similar to that in the SampleOutput folder on GitHub
 
 ```
 
