@@ -58,15 +58,6 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 ----------
 
 
-some code below
-```julia
-for i = 1:11
-  println("iiiiPPP")
-end
-```
-
-uuu
-
 ***Use cases***
 * use sleep_ns() whenever sleep() is not accurate enough for your purposes
 * any application where a process must start and end on a precise schedule is suitable for sleep_ns()
@@ -146,10 +137,12 @@ sleep_time   |        cpu load
    * sleep_ns() function
    * simple_compare() function
    * comparison_report() function
+   * ten_sleeps() function
  * module Mainline
    * import NewSleep.sleep_ns
    * import NewSleep.simple_compare
    * import NewSleep.comparison_report
+   * import NewSleep.ten_sleeps
    * runs all sorts of sample sleep stuff to show sleep_ns in action
  * 
 
@@ -158,6 +151,6 @@ sleep_time   |        cpu load
 * 
 
 ***To-Do***
-* learn GitHub commands
+* learn how to use GitHub to create a Julia package
 * create a Julia package for AccurateSleep
 * investigate C instructions that are NOP and take up time but not CPU load
