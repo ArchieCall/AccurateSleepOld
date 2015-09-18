@@ -6,9 +6,17 @@
 
 ***Installation***
 * Method A: Copy and paste the code in file "sleep_ns.jl"
-```
-dkdkdk
-dkdkdk
+```julia
+#-- copy and paste the contents of "sleep_ns.jl" into an appropriate location in your Julia application
+#-- the contents are the totality of the sleep_ns() function
+
+sleep_ns(.05)  #-- warm up sleep_ns
+sleep_ns(.05)  #-- sleep acurately for .05 seconds
+
+wanted_sleep = .002
+actual_sleep = sleep_ns(wanted_sleep)
+@show(wanted_sleep, actual_sleep)
+
 ```
 * Method B: Copy and paste the code from file "AccurateSleep.jl"
 
