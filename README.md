@@ -57,9 +57,7 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 
 
 ----------
-
-
-***Use cases***
+## Use cases
 * use sleep_ns() whenever sleep() is not accurate enough for your purposes
 * any application where a process must start and end on a precise schedule is suitable for sleep_ns()
 * for example
