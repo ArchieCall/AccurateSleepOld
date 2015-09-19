@@ -73,7 +73,7 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 -------------
 
 
-***Function sleep_ns() is a hybrid solution that works as follows:*** 
+** How sleep_ns() works 
   * the actual sleep time of sleep() was examined
   * the actual time was always greater than the specified time
   * the average error of the sleep was about .00150 second
@@ -92,7 +92,7 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
   * in the while loop when nano2 equals or exceeds nanofinal, then sleep_ns() is done
   * delta returned in the return statement 
   
-***CPU loading when using sleep_ns***
+## CPU loading when using sleep_ns
 * the sleep(partial_sleep_time) portion of sleep_ns() has zero impact on loading
 * the burn cycle of sleep_ns() has an impact on cpu loading
 * on my Windows 10 Core i5 laptop running Julia 3.11, I found that the burn cycle maxed out at 29% CPU loading
