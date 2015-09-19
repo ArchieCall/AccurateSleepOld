@@ -5,10 +5,11 @@
 * in contrast, sleep() has an average error of .001150 seconds, with 5% of the errors exceeding .002100 seconds
 
 ***Installation***
-* Method A: Copy and paste the code in file "sleep_ns.jl"
+* Method A: Copy and paste the code in file "sleep_ns.jl - this is the sleep_ns() function"
 ```julia
 #-- copy and paste the contents of "sleep_ns.jl" into an appropriate location in your Julia application
-#-- the contents are the totality of the sleep_ns() function
+#-- the contents are the sleep_ns() function
+#-- no external packages are required 
 
 sleep_ns(.05)  #-- warm up sleep_ns
 sleep_ns(.05)  #-- sleep accurately for .05 seconds
