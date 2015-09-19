@@ -130,12 +130,12 @@ sleep_time   |        cpu load
  * module NewSleep
    * sleep_ns() function
    * simple_compare() function
-   * comparison_report() function
+   * detail_compare() function
    * ten_sleeps() function
  * module Mainline
    * import NewSleep.sleep_ns
    * import NewSleep.simple_compare
-   * import NewSleep.comparison_report
+   * import NewSleep.detail_compare
    * import NewSleep.ten_sleeps
    * runs all sorts of sample sleep stuff to show sleep_ns in action
  * 
