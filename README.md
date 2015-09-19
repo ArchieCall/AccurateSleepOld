@@ -73,7 +73,7 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 -------------
 
 
-** How sleep_ns() works 
+## How sleep_ns() works 
   * the actual sleep time of sleep() was examined
   * the actual time was always greater than the specified time
   * the average error of the sleep was about .00150 second
@@ -104,14 +104,9 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 * if the sleep_time is greater than .00230, then the sleep is a hybrid of sleep and burn
 * the greater the sleep_time in relation to burn_time the less the impact on loading
 * for example, at sleep_time = .00800 seconds, the impact on cpu loading is 4%, while at .00400 seconds the loading is 12%
-* 
 
 
-
-
-
-
-The impact of sleep_ns on computer cpu loading is summarized below.
+***The impact of sleep_ns on computer cpu loading is summarized below***
 
 sleep_time   |        cpu load  
 -----------  |        --------  
@@ -149,7 +144,7 @@ sleep_time   |        cpu load
 * sleep_ns()   #--- just the sleep_ns() ready to cut a paste into your app
 * 
 
-***To-Do***
+## To-Do
 * learn how to use GitHub to create a Julia package
 * create a Julia package for AccurateSleep
 * investigate C instructions that are NOP and take up time but not CPU load
