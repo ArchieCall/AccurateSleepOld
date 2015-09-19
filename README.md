@@ -4,7 +4,7 @@
 * sleep_ns() has an average error rate of .000001 seconds, with only 5% of the errors exceeding .000002 seconds
 * in contrast, sleep() has an average error of .001150 seconds, with 5% of the errors exceeding .002100 seconds
 
-***Installation***
+### Installation
 * Method A: Copy and paste the code in file "sleep_ns.jl - this is the sleep_ns() function"
 ```julia
 #-- copy and paste the contents of "sleep_ns.jl" into an appropriate location in your Julia application
