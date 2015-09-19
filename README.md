@@ -40,7 +40,6 @@ include("c:\\ArchieJulia\\AccurateSleep.jl")  #-- revise the file location speci
 ### Table showing results for sample simulation
 * **6,000 Samples**  `   ` comparing sleep(.005)  and  sleep_ns(.005)
 * **DIFF** => ***sleep(.005) - .005***  or ***sleep_ns(.005) - .005***
-* **AAA**
 * **CDF** => cumulative density function of DIFF
 
   Statistic            |   sleep(.005)           | sleep_ns(.005)                 
