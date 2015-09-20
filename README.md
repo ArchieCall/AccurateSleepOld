@@ -5,6 +5,7 @@
 * in contrast, sleep() has an average error of .001150 seconds, with 5% of the errors exceeding .002100 seconds
 
 ### Installation
+***I apologise up front that this is not a package install! I will get there one Github command are in my mind!***
 **Method A: Manually install just the function sleep_ns()**
 ```julia
 #-- copy and paste the contents of "sleep_ns.jl" into an appropriate location in your Julia application
