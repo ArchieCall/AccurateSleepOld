@@ -5,11 +5,10 @@
 * in contrast, sleep() has an average error of .001150 seconds, with 5% of the errors exceeding .002100 seconds
 
 ### Installation
+```
 ***I apologise up front that this is not a package install!***
-
-
 ***I will get there once Github commands are in my mind!***
-
+```
 
 **Method A: Manually install just the function sleep_ns()**
 ```julia
