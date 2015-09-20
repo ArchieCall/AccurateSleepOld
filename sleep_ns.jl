@@ -1,39 +1,62 @@
-function sleep_ns(sleep_time::FloatingPoint; burn_time::FloatingPoint = .002300)
+function sleep_ns(sleep_time::FloatingPoint)
   #=
-   accurate sleep function written totally in Julia
-   Parameters
-     sleep_time => time to sleep in seconds
-     burn_time => final burn time in seconds - default is .0023 seconds
-     current Julia sleep() function:
-       loses accuracy around 2.2 ms
-       the actual sleep time is quite variable for all ranges of sleep_time
-       is a pure sleep with no impact on CPU loading
-     sleep_ns words as follows:
-       the sleep is broken up into an intial sleep followed by a final burn cycle
-       the initial sleep is the specified sleep_time minus the burn_time
-       the final burn cycle is very accurate as it loops thousands of times before stopping at the sleep_time
-       it uses time_ns to accurately time the sleep
-       errors are less than .00005 seconds (ie., .05 ms)
-       works equally well for sleep_time's ranging from thousands of seconds down to .00001 seconds, or less
-      sleep_time's effect on cpu loading
-        sleep_time is greater then .004 seconds => neglible impact on CPU loading
-        sleep_time is between .001 and .004 seconds => only slight impact but the computer very usable for other tasks
-        sleep_time between .0001 and .004 seconds => some impact - however computer is still not sluggish
+   + Purpose: an accurate sleep function written totally in Julia
+   + Parameter:
+       - sleep_time - seconds to sleep
+           - must be floating point within range .000001 to 100.
+   + Hybrid solution
+       - combines regular sleep() function with a final burn cycle
+       - regular sleep is simply (sleep_time - burn_time)
+       - any remaining time after the sleep() is burned off in a while loop
+       - burn_time constant of .002300 seconds evolved after many simulations
+         that traded off accuracy vs. cpu loading
+       - all timing is with time_ns() which uses tics down to the nano second
+   + Returns:  delta -> the actual elapsed time in seconds of the sleep
+               note: delta is never less than the desired sleep_time
+   + Accuracy
+      - sleep()    - average error is .001300 seconds
+      - sleep_ns() - average error is .000002 seconds
+   + see the web site: "github.org/ArchieCall/AccurateSleep" for further information
   =#
-  const tics_per_second = 1_000_000_000.  #-- converts diff time_ns ticks to seconds
-  nano1 = time_ns()  #-- get initial time tic
-  #------ the initial sleep that reserves the burn_time
+
+  const tics_per_second = 1_000_000_000  #-- converts differential time_ns ticks to elapsed seconds
+  const burn_time = .002300  #-- time in seconds that is reserved for accurate burning
+  const min_burn_time = .9 * burn_time #-- minimum time reserved for burning
+
+  if sleep_time > 100. || sleep_time < .000005
+    @printf("Error:  sleep_time value of %13.8f is not between .000005 and 100. seconds!", sleep_time)
+    Bad_Parm()  #-- dummy error function put here to halt program
+  end
+
+  nano1 = time_ns()  #-- get beginning time tic
+
+  #------ the initial sleep that reserves off the burn_time
   partial_sleep_time = sleep_time - burn_time
+  #--- adjust partial_sleep_time to always have a remaining_burn_tine
+  #    that is greater than the min_burn_time, note. this only applies
+  #    if the specified sleep_time is greater than the burn_time
+  if partial_sleep_time > 0. && partial_sleep_time  < burn_time
+    remaining_burn_time = sleep_time - partial_sleep_time
+    if remaining_burn_time < min_burn_time
+      remaining_burn_time = min_burn_time
+      partial_sleep_time = sleep_time - remaining_burn_time
+    end
+  end
+
   if partial_sleep_time > 0.
     sleep(partial_sleep_time)  #-- standard Julia sleep of partial_sleep_time
   end
+
   #------ final burn_time loops until full sleep_time has elapsed
-  delta = 0.
+  delta = 0.     #-- make delta available outside while loop
   while true
     nano2 = time_ns() #-- take tic to allow delta calc
-    delta = (nano2 - nano1)/tics_per_second
-    delta >= sleep_time && break  #-- break out if full time elapsed
+    delta = (nano2 - nano1) / 10^9  #-- actual elapsed time of sleep
+    if delta >= sleep_time
+      break  #-- break out if full time has elapsed
+    end
   end
+
   return delta
-end
+end  #-- End of sleep_ns() function
 
