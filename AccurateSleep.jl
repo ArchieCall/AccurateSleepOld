@@ -1,12 +1,13 @@
 # AccurateSleep.jl
-# 09-15-2015
+# 09-20-2015
 module NewSleep
 
 function sleep_ns(sleep_time::FloatingPoint)
   #=
    + Purpose: an accurate sleep function written totally in Julia
-   + Parameter:  sleep_time in seconds
-       - must be floating point within range .000001 to 100.
+   + Parameter:
+       - sleep_time - seconds to sleep
+           - must be floating point within range .000001 to 100.
    + Hybrid solution
        - combines regular sleep() function with a final burn cycle
        - regular sleep is simply (sleep_time - burn_time)
@@ -28,12 +29,10 @@ function sleep_ns(sleep_time::FloatingPoint)
 
   if sleep_time > 100. || sleep_time < .000005
     @printf("Error:  sleep_time value of %13.8f is not between .000005 and 100. seconds!", sleep_time)
-    #ArgumentError
-    sleep_time_parm_out_of_range()
+    Bad_Parm()  #-- dummy error function put here to halt program
   end
 
   nano1 = time_ns()  #-- get beginning time tic
-  nano_final = nano1 + (sleep_time * tics_per_second)
 
   #------ the initial sleep that reserves off the burn_time
   partial_sleep_time = sleep_time - burn_time
@@ -51,36 +50,40 @@ function sleep_ns(sleep_time::FloatingPoint)
   if partial_sleep_time > 0.
     sleep(partial_sleep_time)  #-- standard Julia sleep of partial_sleep_time
   end
+
   #------ final burn_time loops until full sleep_time has elapsed
-  delta = 0.
-  nano2 = nano1
+  delta = 0.     #-- make delta available outside while loop
   while true
     nano2 = time_ns() #-- take tic to allow delta calc
-    nano2 >= nano_final && break  #-- break out if full time has elapsed
-    delta = (nano2 - nano1) / tics_per_second  #-- actual elapsed time of sleep
+    delta = (nano2 - nano1) / 10^9  #-- actual elapsed time of sleep
+    if delta >= sleep_time
+      break  #-- break out if full time has elapsed
+    end
   end
 
   return delta
 end  #-- End of sleep_ns() function
 
 
-function simple_compare(simulation_time::FloatingPoint, sleep_time::FloatingPoint; warm_up = false)
-
+function simple_compare(simulation_time::FloatingPoint, sleep_time::FloatingPoint)
+  #=
+    Compares sleep_ns() vs. sleep() for single value of sleep_time
+    Parms:
+      total_sim_time -> total simulation time for each sleep_time in the sleep_array
+      sleep_array -> an array of sleep_times   ie. [.005, .002, .001, .0001, .00001]
+    Up to 20,000 simulation samples are run for each sleep_time
+    Pay attention to the Mean Difference statistic which highlights accuracy of sleep_ns()
+  =#
   const tics_per_sec = 1_000_000_000
   num_iters = convert(Integer,round(simulation_time / sleep_time))
   if num_iters < 1
     num_iters = 1
   end
-  if warm_up
-    num_iters = 1
-  end
   revised_simulation_time = num_iters * sleep_time
-  if !warm_up
-    @printf("\n========================== simple_compare simulation =======================\n")
-    @show(num_iters)
-    @printf("Total simulation time  ---------------------------------  %10.6f seconds\n", revised_simulation_time)
-    @printf("Specified sleep time -----------------------------------  %10.6f seconds\n", sleep_time)
-  end
+  @printf("\n========================== simple_compare simulation =======================\n")
+  @show(num_iters)
+  @printf("Total simulation time  ---------------------------  %10.6f seconds\n", revised_simulation_time)
+  @printf("Specified sleep time -----------------------------  %10.6f seconds\n", sleep_time)
 
   delta_a = 0.
   nano1 = time_ns()
@@ -106,42 +109,38 @@ function simple_compare(simulation_time::FloatingPoint, sleep_time::FloatingPoin
   ave_delta_b = delta_b / num_iters
   ave_diff_a = ave_delta_a - sleep_time
   ave_diff_b = ave_delta_b - sleep_time
-  if !warm_up
-    @printf("Average sleep time for sleep() -------------------------  %10.6f seconds\n", ave_delta_a)
-    @printf("Average sleep time for sleep_ns() ----------------------  %10.6f seconds\n", ave_delta_b)
-    @printf("Average differential sleep time for sleep() ------------  %10.6f seconds\n", ave_diff_a)
-    @printf("Average differential sleep time for sleep_ns() ---------  %10.6f seconds\n", ave_diff_b)
-  end
+  @printf("Average time for sleep() -------------------------  %10.6f seconds\n", ave_delta_a)
+  @printf("Average time for sleep_ns() ----------------------  %10.6f seconds\n", ave_delta_b)
+  @printf("Average differential time for sleep() ------------  %10.6f seconds\n", ave_diff_a)
+  @printf("Average differential time for sleep_ns() ---------  %10.6f seconds\n", ave_diff_b)
   return nothing
 end  #-- End of simple_compare() function
 
 
-function comparison_report(total_sim_time::FloatingPoint, sleep_array; warm_up = false)
+function detail_compare(total_sim_time::FloatingPoint, sleep_array)
   #=
-    Compares sleep_ns() vs. sleep() for multiple values of start_sleep_time
+    Compares sleep_ns() vs. sleep() over multiple values of sleep_time
     Parms:
       total_sim_time -> total simulation time for each sleep_time in the sleep_array
       sleep_array -> an array of sleep_times   ie. [.005, .002, .001, .0001, .00001]
-    Up to 100,000 simulation samples are run for each sleep_time
+    Up to 20,000 simulation samples are run for each sleep_time
     Pay attention to the Mean Difference statistic which highlights accuracy of sleep_ns()
 =#
-  if !warm_up
-    @printf("\n====================== comparison_report simulation ========================\n")
-    #@show(sleep_array)
-    @printf("Total simulation time  ---------------------------------  %10.6f seconds\n", total_sim_time)
-    for i = 1:length(sleep_array)
-      @printf("Specified sleep time(s) --------------------------------  %10.6f seconds\n", sleep_array[i])
-    end
+  @printf("\n======================= detail_compare simulation =========================\n")
+  #@show(sleep_array)
+  @printf("Total simulation time  ---------------------------------  %10.6f seconds\n", total_sim_time)
+  for i = 1:length(sleep_array)
+    @printf("Specified sleep time(s) --------------------------------  %10.6f seconds\n", sleep_array[i])
   end
 
-  sample_size = 20_000
+  sample_size = 20_000  #-- maximum number iters used
 
-  sleep_obs1 = zeros(Float64,sample_size)
-  sleep_obs2 = zeros(Float64,sample_size)
-  sleep_count1 = zeros(Float64,sample_size)
-  sleep_count2 = zeros(Float64,sample_size)
-  sleep_cdf1 = zeros(Float64,sample_size)
-  sleep_cdf2 = zeros(Float64,sample_size)
+  sleep_obs1 = zeros(FloatingPoint, sample_size)
+  sleep_obs2 = zeros(FloatingPoint, sample_size)
+  sleep_count1 = zeros(FloatingPoint, sample_size)
+  sleep_count2 = zeros(FloatingPoint, sample_size)
+  sleep_cdf1 = zeros(FloatingPoint, sample_size)
+  sleep_cdf2 = zeros(FloatingPoint, sample_size)
 
   cpu_level =      [.0500,
                     .0300,
@@ -242,107 +241,138 @@ function comparison_report(total_sim_time::FloatingPoint, sleep_array; warm_up =
       end
     end
 
-    if !warm_up
-      #--- basic stats from sleep_obs
-      mean1 = mean(sleep_obs1[1:num_iters])
-      mean2 = mean(sleep_obs2[1:num_iters])
-      diff1_mean = mean1 - sleep_time
-      diff2_mean = mean2 - sleep_time
-      max1 = maximum(sleep_obs1[1:num_iters])
-      max2 = maximum(sleep_obs2[1:num_iters])
-      min1 = minimum(sleep_obs1[1:num_iters])
-      min2 = minimum(sleep_obs2[1:num_iters])
-      diff1_max = max1 - sleep_time
-      diff2_max = max2 - sleep_time
+    #--- basic stats from sleep_obs
+    mean1 = mean(sleep_obs1[1:num_iters])
+    mean2 = mean(sleep_obs2[1:num_iters])
+    diff1_mean = mean1 - sleep_time
+    diff2_mean = mean2 - sleep_time
+    max1 = maximum(sleep_obs1[1:num_iters])
+    max2 = maximum(sleep_obs2[1:num_iters])
+    min1 = minimum(sleep_obs1[1:num_iters])
+    min2 = minimum(sleep_obs2[1:num_iters])
+    diff1_max = max1 - sleep_time
+    diff2_max = max2 - sleep_time
 
-      #--- generate the percent counts in each bracket
-      for i = 1:num_iters
-        delta1 = sleep_obs1[i]
-        bin1 = convert(Integer,round(delta1 * sample_size / max1))
-        if bin1 < 1
-          bin1 = 1
-        end
-        sleep_count1[bin1] += 1
-        delta2 = sleep_obs2[i]
-        bin2 = convert(Integer,round(delta2 * sample_size / max2))
-        if bin2 < 1
-          bin2 = 1
-        end
-        sleep_count2[bin2] += 1
+    #--- generate the percent counts in each bracket
+    for i = 1:num_iters
+      delta1 = sleep_obs1[i]
+      bin1 = convert(Integer,round((delta1 - min1) * sample_size / (max1 - min1)))
+      if bin1 < 1
+        bin1 = 1
       end
+      sleep_count1[bin1] += 1
 
-      #--- generate the cdf for each bracket
-      cdf1_prior = 0
-      for i = 1:sample_size
-        sleep_cdf1[i] = cdf1_prior + (sleep_count1[i]/num_iters)
-        cdf1_prior = sleep_cdf1[i]
+      delta2 = sleep_obs2[i]
+      bin2 = convert(Integer,round((delta2 - min2) * sample_size / (max2 - min2)))
+      if bin2 < 1
+        bin2 = 1
       end
-      cdf2_prior = 0
-      for i = 1:sample_size
-        sleep_cdf2[i] = cdf2_prior + (sleep_count2[i]/num_iters)
-        cdf2_prior = sleep_cdf2[i]
-      end
-
-      #--- setup defs for confidence limits
-      Levels = [.0001, .0010, .0100, .2000, .5000,
-                .6667, .8000, .9500, .9900, .9990, .9999]
-      LevelId = ["00.01%", "00.10%", "01.00%", "20.00%", "50.00%",
-                 "66.67%", "80.00%", "95.00%", "99.00%", "99.90%", "99.99%"]
-      LevelFound1 = [false, false, false, false, false, false, false, false, false, false, false]
-      LevelFound2 = [false, false, false, false, false, false, false, false, false, false, false]
-      LevelSecs1 = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
-      LevelSecs2 = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
-      num_levels = 11  #-- number of confidence levels
-
-      #--- generate stats for confidence limits
-      for i = 1:sample_size
-        for j = 1:num_levels
-          if !LevelFound1[j] && (sleep_cdf1[i] >= Levels[j])
-            LevelFound1[j] = true
-            LevelSecs1[j] = i * max1 / sample_size
-          end
-        end
-        for j = 1:num_levels
-          if !LevelFound2[j] && (sleep_cdf2[i] >= Levels[j])
-            LevelFound2[j] = true
-            LevelSecs2[j] = i * max2 / sample_size
-          end
-        end
-      end
-
-      #--- print results for a given sleep_time
-      @printf("\n===================================================================\n")
-      @printf("    STATISTIC              -- sleep_ns() --        --- sleep() ---         \n")
-      #@printf("===================================================================\n")
-      @printf("Specified sleep_time --  %10.6f seconds      %10.6f seconds \n", sleep_time, sleep_time)
-      @printf("Mean sleep ------------  %10.6f seconds      %10.6f seconds \n", mean2, mean1)
-      @printf("Maximum sleep ---------  %10.6f seconds      %10.6f seconds \n", max2, max1)
-      @printf("Minimum sleep ---------  %10.6f seconds      %10.6f seconds \n", min2, min1)
-      @printf("Mean difference -------  %10.6f seconds      %10.6f seconds \n", diff2_mean, diff1_mean)
-      @printf("Maximum difference ----  %10.6f seconds      %10.6f seconds \n", diff2_max, diff1_max)
-      @printf("-------------------------------------------------------------------\n")
-      @printf("  CDF OBSERVATIONS        -- sleep_ns() --        --- sleep() ---         \n")
-      for i = 1:num_levels  #-- print confidence level of observations
-        @printf("%s obs's under       %10.6f seconds      %10.6f seconds \n",
-                LevelId[i], LevelSecs2[i], LevelSecs1[i] )
-      end
-      @printf("-------------------------------------------------------------------\n")
-      @printf("  CDF DIFFERENCES          -- sleep_ns() --        --- sleep() ---         \n")
-      for i = 1:num_levels  #-- print confidence level of diffs
-        @printf("%s diff's under      %10.6f seconds      %10.6f seconds \n",
-                LevelId[i], LevelSecs2[i]-sleep_time, LevelSecs1[i]-sleep_time)
-      end
-      @printf("-------------------------------------------------------------------\n")
-      @printf("Simulation time       => %10.6f seconds\n", total_sim_time)
-      @printf("Number of iterations  =>   %i \n", num_iters)
-      @printf("Specified sleep time  => %10.6f seconds\n", sleep_time)
-      @printf("CPU load [one core]   => %10.6f percent\n", calc_load)
-      @printf("-------------------------------------------------------------------\n")
+      sleep_count2[bin2] += 1
     end
+
+    #--- generate the cdf for each bracket
+    cdf1_prior = 0.
+    for i = 1:sample_size
+      sleep_cdf1[i] = cdf1_prior + (sleep_count1[i]/num_iters)
+      cdf1_prior = sleep_cdf1[i]
+    end
+    cdf2_prior = 0.
+    for i = 1:sample_size
+      sleep_cdf2[i] = cdf2_prior + (sleep_count2[i]/num_iters)
+      cdf2_prior = sleep_cdf2[i]
+    end
+
+    #--- setup defs for confidence limits
+    Levels = [.0001, .0010, .0100, .2000, .5000,
+              .6667, .8000, .9500, .9900, .9990, .9999]
+    LevelId = ["00.01%", "00.10%", "01.00%", "20.00%", "50.00%",
+               "66.67%", "80.00%", "95.00%", "99.00%", "99.90%", "99.99%"]
+    LevelFound1 = [false, false, false, false, false, false, false, false, false, false, false]
+    LevelFound2 = [false, false, false, false, false, false, false, false, false, false, false]
+    LevelSecs1 = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
+    LevelSecs2 = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
+    num_levels = 11  #-- number of confidence levels
+
+    #--- generate stats for confidence limits
+    for i = 1:sample_size
+      for j = 1:num_levels
+        if !LevelFound1[j] && (sleep_cdf1[i] >= Levels[j])
+          LevelFound1[j] = true
+          LevelSecs1[j] = min1 + (i * (max1-min1) / sample_size)
+        end
+      end
+      for j = 1:num_levels
+        if !LevelFound2[j] && (sleep_cdf2[i] >= Levels[j])
+          LevelFound2[j] = true
+          LevelSecs2[j] = min2 + (i * (max2-min2) / sample_size)
+        end
+      end
+    end
+
+    #--- print results for a given sleep_time
+    @printf("\n===================================================================\n")
+    @printf("    STATISTIC              -- sleep_ns() --        --- sleep() ---         \n")
+    #@printf("===================================================================\n")
+    @printf("Specified sleep_time --  %10.6f seconds      %10.6f seconds \n", sleep_time, sleep_time)
+    @printf("Mean sleep ------------  %10.6f seconds      %10.6f seconds \n", mean2, mean1)
+    @printf("Maximum sleep ---------  %10.6f seconds      %10.6f seconds \n", max2, max1)
+    @printf("Minimum sleep ---------  %10.6f seconds      %10.6f seconds \n", min2, min1)
+    @printf("Mean difference -------  %10.6f seconds      %10.6f seconds \n", diff2_mean, diff1_mean)
+    @printf("Maximum difference ----  %10.6f seconds      %10.6f seconds \n", diff2_max, diff1_max)
+    @printf("-------------------------------------------------------------------\n")
+    @printf("  CDF OBSERVATIONS        -- sleep_ns() --        --- sleep() ---         \n")
+    for i = 1:num_levels  #-- print confidence level of observations
+      @printf("%s obs's under       %10.6f seconds      %10.6f seconds \n",
+              LevelId[i], LevelSecs2[i], LevelSecs1[i] )
+    end
+    @printf("-------------------------------------------------------------------\n")
+    @printf("  CDF DIFFERENCES          -- sleep_ns() --        --- sleep() ---         \n")
+    for i = 1:num_levels  #-- print confidence level of diffs
+      @printf("%s diff's under      %10.6f seconds      %10.6f seconds \n",
+              LevelId[i], LevelSecs2[i]-sleep_time, LevelSecs1[i]-sleep_time)
+    end
+    @printf("-------------------------------------------------------------------\n")
+    @printf("Simulation time       => %10.6f seconds\n", total_sim_time)
+    @printf("Number of iterations  =>   %i \n", num_iters)
+    @printf("Specified sleep time  => %10.6f seconds\n", sleep_time)
+    @printf("CPU load [one core]   => %10.6f percent\n", calc_load)
+    @printf("-------------------------------------------------------------------\n")
   end
   println("\n\n")
   return nothing
-end  #-- End of comparison_report() function
+end  #-- End of detail_compare function
+
+function seven_sleeps()
+  #-- prints range of sleep_time's for sleep_ns() showing their accuracy
+  const tics_per_second = 1_000_000_000  #-- used to convert elapsed time_ns tics to seconds
+  println("\n------- samples calls to sleep_ns() ------")
+  start_sleep_time = 1.
+  for i = 1:6  sleep_time = start_sleep_time / 10^(i - 1)
+    delta = sleep_ns(sleep_time)
+    @printf("Wanted sleep time:   ------ %11.9f seconds\n", sleep_time)
+    @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n", delta)
+  end
+  sleep_time = .000005
+  delta = sleep_ns(sleep_time)
+  @printf("Wanted sleep time:   ------ %11.9f seconds\n", sleep_time)
+  @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n", delta)
+  println("")
+
+  #-- prints range of sleep_time's for sleep() showing their higher error rate
+  println("\n--------- samples to call to sleep() ---------")
+  start_sleep_time = 1.
+  for i = 1:6  sleep_time = start_sleep_time / 10^(i - 1)
+    tic1 = time_ns()   #-- since sleep() does not return a delta we need to calculate manually
+    sleep(sleep_time)
+    tic2 = time_ns()
+    delta = (tic2-tic1)/tics_per_second
+    @printf("Wanted sleep time:   ------ %11.9f seconds\n", sleep_time)
+    @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n", delta)
+  end
+  println("")
+
+  return nothing
+end  #-- end of seven_sleeps function
 
 
 end  #-- End of module NewSleep
@@ -351,61 +381,41 @@ end  #-- End of module NewSleep
 module Mainline
 #=
   To-Do
+  -----
+  eliminate anything about 64 bits
   call GitHub under program control
-  run sleep_ns(.00200) for 2 hours and check memory used.
+  run sleep_ns(.00200) for 2 hours and check memory used
+  -----
   #
 =#
 println("--- module:Mainline has started ---")
 
 import NewSleep.sleep_ns           #-- import sleep_ns function
 import NewSleep.simple_compare     #-- import simple_compare function
-import NewSleep.comparison_report  #-- import comparison_report function
+import NewSleep.detail_compare     #-- import detail_report function
+import NewSleep.seven_sleeps         #-- import ten_sleeps function
 
-#--- sample sleeps that show direct sleep_ns() in action
 #run(`C:\\Users\\Owner\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe github.org//ArchieCall//AccurateSleep`)
-const tics_per_second = 1_000_000_000
-
 #codesample
 
-sleep_time = .003
-@show(sleep_time)  #-- show specified sleep_time
-@show(sleep_ns(sleep_time))  #-- sleep for specified time and show delta
+#--- sample sleeps that show sleep_ns() in action
+sleep_time = .003   #-- want to sleep for .003 seconds
+sleep_ns(sleep_time)  #-- first call to warm up sleep_ns()
 
-println("\n------- samples calls to sleep_ns() ------")
-#-- prints range of sleep_time's for sleep_ns() showing their accuracy
-start_sleep_time = 1.
-for i = 1:6  sleep_time = start_sleep_time / 10^(i - 1)
-  delta = sleep_ns(sleep_time)
-  @printf("Wanted sleep time:   ------ %11.9f seconds\n", sleep_time)
-  @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n", delta)
-end
-println("")
+@printf("Wanted sleep time ------> %14.7f \n", sleep_time)  #-- sleep for specified time and show delta
+@printf("Actual sleep time ------> %14.7f \n", sleep_ns(sleep_time))  #-- sleep for specified time and show delta
 
-println("\n--------- samples to call to sleep() ---------")
-#-- prints range of sleep_time's for sleep() showing their higher error rate
-start_sleep_time = 1.
-for i = 1:7  sleep_time = start_sleep_time / 10^(i - 1)
-  tic1 = time_ns()
-  sleep(sleep_time)
-  tic2 = time_ns()
-  delta = (tic2-tic1)/tics_per_second
-  @printf("Wanted sleep time:   ------ %11.9f seconds\n", sleep_time)
-  @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n", delta)
-end
-println("")
+seven_sleeps()  #-- print 7 graduated sleeps of sleep() and sleep_ns()
 
-#sleep_ns(1)    #-- integers times not allowed! (uncomment to see error)
+#sleep_ns(.000001)   #-- sleep time is too small! (uncomment to see error message)
+#sleep_ns(1)         #-- integers sleep times not allowed! (uncomment to see error message)
 
+#--- simple comparison: runs of only one sleep_time comparing sleep_ns() and sleep()
+simple_compare(10., .00500)  #-- simulate 10. seconds for a sleep_time of .00500 seconds
 
-#--- simple comparison: runs takes about 20 seconds
-simple_compare(.1, .00500, warm_up = true)  #-- warm_up implies no output
-simple_compare(10., .00500)  #-- production run - 10 secs duration for .00231 secs sleep
-
-#--- detailed comparison report: runs about 1 minute for each sleep_time
-sleep_array = [.05000]
-#sleep_array = [.008000, .005000, .002500, .002310, .001000, .000100, .000010, .000005]
-comparison_report(.1, sleep_array, warm_up = true)  #--warmup implies no output
-comparison_report(15., sleep_array)  #-- production run
+#--- detailed comparison: runs multiple sleep_time's
+sleep_array = [.500000, .050000, .002500, .002310, .001000, .000100, .000010, .000005]
+detail_compare(20., sleep_array)  #-- simulate 20. seconds for each sleep_time
 
 #-- Have fun testing sleep_ns()
 #-- Archie Call - archcall@gmail.com
