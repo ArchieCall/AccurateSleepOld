@@ -370,6 +370,7 @@ function seven_sleeps()
 
   return nothing
 end  #-- end of seven_sleeps function
+export sleep_ns
 
 
 end  #-- End of module NewSleep
