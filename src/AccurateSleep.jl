@@ -1,5 +1,5 @@
 #--- AccurateSleep.jl
-#-- Stand alone script to demo using and comparing sleep_ns() to sleep()
+#-- Stand alone script to demo using sleep_ns() compared to sleep()
 # 09-22-2015
 module NewSleep
 
@@ -370,7 +370,32 @@ function seven_sleeps()
 
   return nothing
 end  #-- end of seven_sleeps function
-export sleep_ns
+
+function demo_sleep_ns()
+  #--- sample sleeps that show sleep_ns() in action
+  sleep_time = .003   #-- want to sleep for .003 seconds
+  sleep_ns(sleep_time)  #-- first call to warm up sleep_ns()
+
+  @printf("Wanted sleep time ------> %14.7f \n", sleep_time)  #-- sleep for specified time and show delta
+  @printf("Actual sleep time ------> %14.7f \n", sleep_ns(sleep_time))  #-- sleep for specified time and show delta
+
+  seven_sleeps()  #-- print 7 graduated sleeps of sleep() and sleep_ns()
+
+  StopNowWhileTesting()
+
+  #sleep_ns(.000001)   #-- sleep time is too small! (uncomment to see error message)
+  #sleep_ns(1)         #-- integers sleep times not allowed! (uncomment to see error message)
+
+  #--- simple comparison: runs of only one sleep_time comparing sleep_ns() and sleep()
+  simple_compare(10., .00500)  #-- simulate 10. seconds for a sleep_time of .00500 seconds
+
+  #--- detailed comparison: runs multiple sleep_time's
+  sleep_array = [.500000, .050000, .002500, .002310, .001000, .000100, .000010, .000005]
+  detail_compare(20., sleep_array)  #-- simulate 20. seconds for each sleep_time
+
+end  #-- End of demo_sleep_ns function
+
+#export sleep_ns
 
 
 end  #-- End of module NewSleep
@@ -390,29 +415,11 @@ println("--- module:Mainline has started ---")
 import NewSleep.sleep_ns           #-- import sleep_ns function
 import NewSleep.simple_compare     #-- import simple_compare function
 import NewSleep.detail_compare     #-- import detail_report function
-import NewSleep.seven_sleeps         #-- import ten_sleeps function
+import NewSleep.seven_sleeps       #-- import ten_sleeps function
+import NewSleep.demo_sleep_ns      #-- import ten_sleeps function
 
 #run(`C:\\Users\\Owner\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe github.org//ArchieCall//AccurateSleep`)
-#codesample
-
-#--- sample sleeps that show sleep_ns() in action
-sleep_time = .003   #-- want to sleep for .003 seconds
-sleep_ns(sleep_time)  #-- first call to warm up sleep_ns()
-
-@printf("Wanted sleep time ------> %14.7f \n", sleep_time)  #-- sleep for specified time and show delta
-@printf("Actual sleep time ------> %14.7f \n", sleep_ns(sleep_time))  #-- sleep for specified time and show delta
-
-seven_sleeps()  #-- print 7 graduated sleeps of sleep() and sleep_ns()
-
-#sleep_ns(.000001)   #-- sleep time is too small! (uncomment to see error message)
-#sleep_ns(1)         #-- integers sleep times not allowed! (uncomment to see error message)
-
-#--- simple comparison: runs of only one sleep_time comparing sleep_ns() and sleep()
-simple_compare(10., .00500)  #-- simulate 10. seconds for a sleep_time of .00500 seconds
-
-#--- detailed comparison: runs multiple sleep_time's
-sleep_array = [.500000, .050000, .002500, .002310, .001000, .000100, .000010, .000005]
-detail_compare(20., sleep_array)  #-- simulate 20. seconds for each sleep_time
+demo_sleep_ns()
 
 #-- Have fun testing sleep_ns()
 #-- Archie Call - archcall@gmail.com
@@ -420,4 +427,6 @@ detail_compare(20., sleep_array)  #-- simulate 20. seconds for each sleep_time
 println("\n\n--- module:Mainline has ended ---")
 
 end
+
+
 
