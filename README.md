@@ -1,8 +1,8 @@
 ## AccurateSleep
 ```
-A package that offers a sleep function named:  sleep_ns().
-This function very similiar to the normal Julia sleep() function, albeit with much improved accuracy.
-For exampl: sleep_ns() has an average error rate of .000001 seconds, with only 5% of the errors exceeding .000002 seconds
+A package that offers an alternative sleep function named:  sleep_ns().
+This function is very similiar to the normal Julia sleep() function, albeit with much improved accuracy.
+For example: sleep_ns() has an average error rate of .000001 seconds, with only 5% of the errors exceeding .000002 seconds
 In contrast: sleep() has an average error of .001150 seconds, with 5% of the errors exceeding .002100 seconds
 ```
 ### Installation
