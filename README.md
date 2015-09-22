@@ -1,4 +1,4 @@
-## sleep_ns(sleep_time)
+## sleep_ns()
 ```
 function that blocks the current task (i.e. sleeps) for the specified number of sleep_time seconds.
 sleep_ns() is very similiar to the normal Julia sleep() function, albeit with much improved accuracy.
