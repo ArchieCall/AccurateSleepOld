@@ -1,6 +1,6 @@
 #--- AccurateSleep.jl
-#-- stand alone script to demo using and comparing sleep_ns() to sleep()
-# 09-21-2015
+#-- Stand alone script to demo using and comparing sleep_ns() to sleep()
+# 09-22-2015
 module NewSleep
 
 function sleep_ns(sleep_time::FloatingPoint)
