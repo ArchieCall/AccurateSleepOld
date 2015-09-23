@@ -1,15 +1,16 @@
 #--- AccurateSleep.jl
 #-- Stand alone script to demo using sleep_ns() compared to sleep()
-# 09-22-2015 Afternoon
-# late night
-module NewSleep
+# 09-23-2015
+workspace()
+
+module AccurateSleep
 
 function sleep_ns(sleep_time::FloatingPoint)
   #=
    + Purpose: an accurate sleep function written totally in Julia
    + Parameter:
        - sleep_time - seconds to sleep
-           - must be floating point within range .000001 to 100.
+           - must be floating point within range .000005 to 100.
    + Hybrid solution
        - combines regular sleep() function with a final burn cycle
        - regular sleep is simply (sleep_time - burn_time)
@@ -26,10 +27,10 @@ function sleep_ns(sleep_time::FloatingPoint)
   =#
 
   const burn_time = .002300  #-- time in seconds that is reserved for accurate burning
-  const min_burn_time = .9 * burn_time #-- minimum time reserved for burning
+  const min_burn_time = .9 * burn_time #-- minimum burn time reserved for burning when sleep_time exceeds burn_time
 
   if sleep_time > 100. || sleep_time < .000005
-    @printf("Error:  sleep_time value of %13.8f is not between .000005 and 100. seconds!", sleep_time)
+    @printf("Error:  sleep_time value of %13.8f is not in range .000005 to 100. seconds!", sleep_time)
     Bad_Parm()  #-- dummy error function to halt program when bad parameter entry
   end
 
@@ -49,14 +50,15 @@ function sleep_ns(sleep_time::FloatingPoint)
   end
 
   if partial_sleep_time > 0.
-    sleep(partial_sleep_time)  #-- standard Julia sleep of partial_sleep_time
+    sleep(partial_sleep_time)  #-- standard Julia sleep of partial_sleep_time (has approx error of .0013 seconds)
   end
 
   #------ final burn_time loops until full sleep_time has elapsed
   delta = 0.     #-- make delta available outside while loop
   while true
     nano2 = time_ns() #-- take tic to allow delta calc
-    delta = (nano2 - nano1) / 10^9  #-- actual elapsed time of sleep
+    #delta = (nano2 - nano1) / 10^9  #-- actual elapsed time of sleep
+    delta = (nano2 - nano1) / 1e9  #-- actual elapsed time of sleep
     if delta >= sleep_time
       break  #-- break out if full time has elapsed
     end
@@ -113,9 +115,8 @@ function simple_compare(simulation_time::FloatingPoint, sleep_time::FloatingPoin
   @printf("Average time for sleep_ns() ----------------------  %10.6f seconds\n", ave_delta_b)
   @printf("Average differential time for sleep() ------------  %10.6f seconds\n", ave_diff_a)
   @printf("Average differential time for sleep_ns() ---------  %10.6f seconds\n", ave_diff_b)
-  return nothing
+  return
 end  #-- End of simple_compare() function
-
 
 function detail_compare(total_sim_time::FloatingPoint, sleep_array)
   #=
@@ -338,22 +339,22 @@ function detail_compare(total_sim_time::FloatingPoint, sleep_array)
     @printf("-------------------------------------------------------------------\n")
   end
   println("\n\n")
-  return nothing
+  return
 end  #-- End of detail_compare function
 
-function seven_sleeps()
+function six_sleeps()
   #-- prints range of sleep_time's for sleep_ns() showing their accuracy
   println("\n------- samples calls to sleep_ns() ------")
   start_sleep_time = 1.
   for i = 1:6  sleep_time = start_sleep_time / 10^(i - 1)
     delta = sleep_ns(sleep_time)
     @printf("Wanted sleep time:   ------ %11.9f seconds\n", sleep_time)
-    @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n", delta)
+    @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n\n", delta)
   end
   sleep_time = .000005
   delta = sleep_ns(sleep_time)
   @printf("Wanted sleep time:   ------ %11.9f seconds\n", sleep_time)
-  @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n", delta)
+  @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n\n", delta)
   println("")
 
   #-- prints range of sleep_time's for sleep() showing their higher error rate
@@ -365,12 +366,12 @@ function seven_sleeps()
     tic2 = time_ns()
     delta = (tic2-tic1) / 10^9
     @printf("Wanted sleep time:   ------ %11.9f seconds\n", sleep_time)
-    @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n", delta)
+    @printf("\Actual sleep time:   ------ %11.9f seconds  <--\n\n", delta)
   end
   println("")
 
-  return nothing
-end  #-- end of seven_sleeps function
+  return
+end  #-- end of six_sleeps function
 
 function demo_sleep_ns()
   #--- sample sleeps that show sleep_ns() in action
@@ -380,9 +381,9 @@ function demo_sleep_ns()
   @printf("Wanted sleep time ------> %14.7f \n", sleep_time)  #-- sleep for specified time and show delta
   @printf("Actual sleep time ------> %14.7f \n", sleep_ns(sleep_time))  #-- sleep for specified time and show delta
 
-  seven_sleeps()  #-- print 7 graduated sleeps of sleep() and sleep_ns()
+  six_sleeps()  #-- print 6 graduated samples of sleep() and sleep_ns()
 
-  StopNowWhileTesting()
+  #StopNowWhileTesting()
 
   #sleep_ns(.000001)   #-- sleep time is too small! (uncomment to see error message)
   #sleep_ns(1)         #-- integers sleep times not allowed! (uncomment to see error message)
@@ -391,43 +392,17 @@ function demo_sleep_ns()
   simple_compare(10., .00500)  #-- simulate 10. seconds for a sleep_time of .00500 seconds
 
   #--- detailed comparison: runs multiple sleep_time's
-  sleep_array = [.500000, .050000, .002500, .002310, .001000, .000100, .000010, .000005]
+  sleep_array = [.050000, .002500, .001000, .000100, .000010, .000005]
   detail_compare(20., sleep_array)  #-- simulate 20. seconds for each sleep_time
+  return
 
 end  #-- End of demo_sleep_ns function
+export sleep_ns, simple_compare, detail_compare, demo_sleep_ns, six_sleeps
 
-#export sleep_ns
+println(" in the accurate sleep module ")
 
+end  #-- End of module AccurateSleep
 
-end  #-- End of module NewSleep
-
-
-module Mainline
-#=
-  To-Do
-  -----
-  call GitHub under program control
-  run sleep_ns(.00200) for 2 hours and check memory used
-  -----
-  #
-=#
-println("--- module:Mainline has started ---")
-
-import NewSleep.sleep_ns           #-- import sleep_ns function
-import NewSleep.simple_compare     #-- import simple_compare function
-import NewSleep.detail_compare     #-- import detail_report function
-import NewSleep.seven_sleeps       #-- import ten_sleeps function
-import NewSleep.demo_sleep_ns      #-- import ten_sleeps function
-
-#run(`C:\\Users\\Owner\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe github.org//ArchieCall//AccurateSleep`)
-demo_sleep_ns()
-
-#-- Have fun testing sleep_ns()
-#-- Archie Call - archcall@gmail.com
-
-println("\n\n--- module:Mainline has ended ---")
-
-end
 
 
 
