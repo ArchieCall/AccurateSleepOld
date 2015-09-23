@@ -1,1 +1,299 @@
+Wanted sleep time ------>      0.0030000 
+Actual sleep time ------>      0.0030002 
+
+------- samples calls to sleep_ns() ------
+Wanted sleep time:   ------ 1.000000000 seconds
+Actual sleep time:   ------ 1.000000000 seconds  <--
+Wanted sleep time:   ------ 0.100000000 seconds
+Actual sleep time:   ------ 0.100000287 seconds  <--
+Wanted sleep time:   ------ 0.010000000 seconds
+Actual sleep time:   ------ 0.010000399 seconds  <--
+Wanted sleep time:   ------ 0.001000000 seconds
+Actual sleep time:   ------ 0.001000204 seconds  <--
+Wanted sleep time:   ------ 0.000100000 seconds
+Actual sleep time:   ------ 0.000100267 seconds  <--
+Wanted sleep time:   ------ 0.000010000 seconds
+Actual sleep time:   ------ 0.000010273 seconds  <--
+Wanted sleep time:   ------ 0.000005000 seconds
+Actual sleep time:   ------ 0.000005342 seconds  <--
+
+
+--------- samples to call to sleep() ---------
+Wanted sleep time:   ------ 1.000000000 seconds
+Actual sleep time:   ------ 1.001510580 seconds  <--
+Wanted sleep time:   ------ 0.100000000 seconds
+Actual sleep time:   ------ 0.101095006 seconds  <--
+Wanted sleep time:   ------ 0.010000000 seconds
+Actual sleep time:   ------ 0.010664873 seconds  <--
+Wanted sleep time:   ------ 0.001000000 seconds
+Actual sleep time:   ------ 0.002195601 seconds  <--
+Wanted sleep time:   ------ 0.000100000 seconds
+Actual sleep time:   ------ 0.001490444 seconds  <--
+Wanted sleep time:   ------ 0.000010000 seconds
+Actual sleep time:   ------ 0.001558659 seconds  <--
+
+
+========================== simple_compare simulation =======================
+num_iters => 2000
+Total simulation time  ---------------------------   10.000000 seconds
+Specified sleep time -----------------------------    0.005000 seconds
+Average time for sleep() -------------------------    0.006332 seconds
+Average time for sleep_ns() ----------------------    0.005002 seconds
+Average differential time for sleep() ------------    0.001332 seconds
+Average differential time for sleep_ns() ---------    0.000002 seconds
+
+======================= detail_compare simulation =========================
+Total simulation time  ---------------------------------   20.000000 seconds
+Specified sleep time(s) --------------------------------    0.050000 seconds
+Specified sleep time(s) --------------------------------    0.002500 seconds
+Specified sleep time(s) --------------------------------    0.001000 seconds
+Specified sleep time(s) --------------------------------    0.000100 seconds
+Specified sleep time(s) --------------------------------    0.000010 seconds
+Specified sleep time(s) --------------------------------    0.000005 seconds
+
+===================================================================
+    STATISTIC              -- sleep_ns() --        --- sleep() ---         
+Specified sleep_time --    0.050000 seconds        0.050000 seconds 
+Mean sleep ------------    0.050001 seconds        0.051329 seconds 
+Maximum sleep ---------    0.050112 seconds        0.052173 seconds 
+Minimum sleep ---------    0.050000 seconds        0.050808 seconds 
+Mean difference -------    0.000001 seconds        0.001329 seconds 
+Maximum difference ----    0.000112 seconds        0.002173 seconds 
+-------------------------------------------------------------------
+  CDF OBSERVATIONS        -- sleep_ns() --        --- sleep() ---         
+00.01% obs's under         0.050000 seconds        0.050808 seconds 
+00.10% obs's under         0.050000 seconds        0.050808 seconds 
+01.00% obs's under         0.050000 seconds        0.050874 seconds 
+20.00% obs's under         0.050000 seconds        0.051063 seconds 
+50.00% obs's under         0.050001 seconds        0.051195 seconds 
+66.67% obs's under         0.050001 seconds        0.051368 seconds 
+80.00% obs's under         0.050001 seconds        0.051633 seconds 
+95.00% obs's under         0.050001 seconds        0.051991 seconds 
+99.00% obs's under         0.050031 seconds        0.052107 seconds 
+99.90% obs's under         0.050112 seconds        0.052173 seconds 
+99.99% obs's under         0.050112 seconds        0.052173 seconds 
+-------------------------------------------------------------------
+  CDF DIFFERENCES          -- sleep_ns() --        --- sleep() ---         
+00.01% diff's under        0.000000 seconds        0.000808 seconds 
+00.10% diff's under        0.000000 seconds        0.000808 seconds 
+01.00% diff's under        0.000000 seconds        0.000874 seconds 
+20.00% diff's under        0.000000 seconds        0.001063 seconds 
+50.00% diff's under        0.000001 seconds        0.001195 seconds 
+66.67% diff's under        0.000001 seconds        0.001368 seconds 
+80.00% diff's under        0.000001 seconds        0.001633 seconds 
+95.00% diff's under        0.000001 seconds        0.001991 seconds 
+99.00% diff's under        0.000031 seconds        0.002107 seconds 
+99.90% diff's under        0.000112 seconds        0.002173 seconds 
+99.99% diff's under        0.000112 seconds        0.002173 seconds 
+-------------------------------------------------------------------
+Simulation time       =>  20.000000 seconds
+Number of iterations  =>   400 
+Specified sleep time  =>   0.050000 seconds
+CPU load [one core]   =>   0.100000 percent
+-------------------------------------------------------------------
+
+===================================================================
+    STATISTIC              -- sleep_ns() --        --- sleep() ---         
+Specified sleep_time --    0.002500 seconds        0.002500 seconds 
+Mean sleep ------------    0.002501 seconds        0.004340 seconds 
+Maximum sleep ---------    0.003734 seconds        0.005237 seconds 
+Minimum sleep ---------    0.002500 seconds        0.003363 seconds 
+Mean difference -------    0.000001 seconds        0.001840 seconds 
+Maximum difference ----    0.001234 seconds        0.002737 seconds 
+-------------------------------------------------------------------
+  CDF OBSERVATIONS        -- sleep_ns() --        --- sleep() ---         
+00.01% obs's under         0.002500 seconds        0.003363 seconds 
+00.10% obs's under         0.002500 seconds        0.003821 seconds 
+01.00% obs's under         0.002500 seconds        0.003884 seconds 
+20.00% obs's under         0.002500 seconds        0.004028 seconds 
+50.00% obs's under         0.002501 seconds        0.004172 seconds 
+66.67% obs's under         0.002501 seconds        0.004395 seconds 
+80.00% obs's under         0.002501 seconds        0.004800 seconds 
+95.00% obs's under         0.002501 seconds        0.005037 seconds 
+99.00% obs's under         0.002505 seconds        0.005127 seconds 
+99.90% obs's under         0.002549 seconds        0.005189 seconds 
+99.99% obs's under         0.003734 seconds        0.005237 seconds 
+-------------------------------------------------------------------
+  CDF DIFFERENCES          -- sleep_ns() --        --- sleep() ---         
+00.01% diff's under        0.000000 seconds        0.000863 seconds 
+00.10% diff's under        0.000000 seconds        0.001321 seconds 
+01.00% diff's under        0.000000 seconds        0.001384 seconds 
+20.00% diff's under        0.000000 seconds        0.001528 seconds 
+50.00% diff's under        0.000001 seconds        0.001672 seconds 
+66.67% diff's under        0.000001 seconds        0.001895 seconds 
+80.00% diff's under        0.000001 seconds        0.002300 seconds 
+95.00% diff's under        0.000001 seconds        0.002537 seconds 
+99.00% diff's under        0.000005 seconds        0.002627 seconds 
+99.90% diff's under        0.000049 seconds        0.002689 seconds 
+99.99% diff's under        0.001234 seconds        0.002737 seconds 
+-------------------------------------------------------------------
+Simulation time       =>  20.000000 seconds
+Number of iterations  =>   8000 
+Specified sleep time  =>   0.002500 seconds
+CPU load [one core]   =>  22.000000 percent
+-------------------------------------------------------------------
+
+===================================================================
+    STATISTIC              -- sleep_ns() --        --- sleep() ---         
+Specified sleep_time --    0.001000 seconds        0.001000 seconds 
+Mean sleep ------------    0.001000 seconds        0.002330 seconds 
+Maximum sleep ---------    0.001086 seconds        0.003243 seconds 
+Minimum sleep ---------    0.001000 seconds        0.001302 seconds 
+Mean difference -------    0.000000 seconds        0.001330 seconds 
+Maximum difference ----    0.000086 seconds        0.002243 seconds 
+-------------------------------------------------------------------
+  CDF OBSERVATIONS        -- sleep_ns() --        --- sleep() ---         
+00.01% obs's under         0.001000 seconds        0.001792 seconds 
+00.10% obs's under         0.001000 seconds        0.001838 seconds 
+01.00% obs's under         0.001000 seconds        0.001888 seconds 
+20.00% obs's under         0.001000 seconds        0.002008 seconds 
+50.00% obs's under         0.001000 seconds        0.002167 seconds 
+66.67% obs's under         0.001000 seconds        0.002250 seconds 
+80.00% obs's under         0.001000 seconds        0.002860 seconds 
+95.00% obs's under         0.001001 seconds        0.003040 seconds 
+99.00% obs's under         0.001001 seconds        0.003131 seconds 
+99.90% obs's under         0.001017 seconds        0.003204 seconds 
+99.99% obs's under         0.001068 seconds        0.003232 seconds 
+-------------------------------------------------------------------
+  CDF DIFFERENCES          -- sleep_ns() --        --- sleep() ---         
+00.01% diff's under        0.000000 seconds        0.000792 seconds 
+00.10% diff's under        0.000000 seconds        0.000838 seconds 
+01.00% diff's under        0.000000 seconds        0.000888 seconds 
+20.00% diff's under        0.000000 seconds        0.001008 seconds 
+50.00% diff's under        0.000000 seconds        0.001167 seconds 
+66.67% diff's under        0.000000 seconds        0.001250 seconds 
+80.00% diff's under        0.000000 seconds        0.001860 seconds 
+95.00% diff's under        0.000001 seconds        0.002040 seconds 
+99.00% diff's under        0.000001 seconds        0.002131 seconds 
+99.90% diff's under        0.000017 seconds        0.002204 seconds 
+99.99% diff's under        0.000068 seconds        0.002232 seconds 
+-------------------------------------------------------------------
+Simulation time       =>  20.000000 seconds
+Number of iterations  =>   20000 
+Specified sleep time  =>   0.001000 seconds
+CPU load [one core]   =>  29.000000 percent
+-------------------------------------------------------------------
+
+===================================================================
+    STATISTIC              -- sleep_ns() --        --- sleep() ---         
+Specified sleep_time --    0.000100 seconds        0.000100 seconds 
+Mean sleep ------------    0.000100 seconds        0.001344 seconds 
+Maximum sleep ---------    0.000235 seconds        0.004009 seconds 
+Minimum sleep ---------    0.000100 seconds        0.000095 seconds 
+Mean difference -------    0.000000 seconds        0.001244 seconds 
+Maximum difference ----    0.000135 seconds        0.003909 seconds 
+-------------------------------------------------------------------
+  CDF OBSERVATIONS        -- sleep_ns() --        --- sleep() ---         
+00.01% obs's under         0.000100 seconds        0.000415 seconds 
+00.10% obs's under         0.000100 seconds        0.000861 seconds 
+01.00% obs's under         0.000100 seconds        0.000908 seconds 
+20.00% obs's under         0.000100 seconds        0.001012 seconds 
+50.00% obs's under         0.000100 seconds        0.001165 seconds 
+66.67% obs's under         0.000100 seconds        0.001181 seconds 
+80.00% obs's under         0.000100 seconds        0.001942 seconds 
+95.00% obs's under         0.000100 seconds        0.002056 seconds 
+99.00% obs's under         0.000101 seconds        0.002136 seconds 
+99.90% obs's under         0.000120 seconds        0.002196 seconds 
+99.99% obs's under         0.000226 seconds        0.003653 seconds 
+-------------------------------------------------------------------
+  CDF DIFFERENCES          -- sleep_ns() --        --- sleep() ---         
+00.01% diff's under        0.000000 seconds        0.000315 seconds 
+00.10% diff's under        0.000000 seconds        0.000761 seconds 
+01.00% diff's under        0.000000 seconds        0.000808 seconds 
+20.00% diff's under        0.000000 seconds        0.000912 seconds 
+50.00% diff's under        0.000000 seconds        0.001065 seconds 
+66.67% diff's under        0.000000 seconds        0.001081 seconds 
+80.00% diff's under        0.000000 seconds        0.001842 seconds 
+95.00% diff's under        0.000000 seconds        0.001956 seconds 
+99.00% diff's under        0.000001 seconds        0.002036 seconds 
+99.90% diff's under        0.000020 seconds        0.002096 seconds 
+99.99% diff's under        0.000126 seconds        0.003553 seconds 
+-------------------------------------------------------------------
+Simulation time       =>   2.000000 seconds
+Number of iterations  =>   20000 
+Specified sleep time  =>   0.000100 seconds
+CPU load [one core]   =>  29.000000 percent
+-------------------------------------------------------------------
+
+===================================================================
+    STATISTIC              -- sleep_ns() --        --- sleep() ---         
+Specified sleep_time --    0.000010 seconds        0.000010 seconds 
+Mean sleep ------------    0.000010 seconds        0.001356 seconds 
+Maximum sleep ---------    0.000023 seconds        0.133791 seconds 
+Minimum sleep ---------    0.000010 seconds        0.000257 seconds 
+Mean difference -------    0.000000 seconds        0.001346 seconds 
+Maximum difference ----    0.000013 seconds        0.133781 seconds 
+-------------------------------------------------------------------
+  CDF OBSERVATIONS        -- sleep_ns() --        --- sleep() ---         
+00.01% obs's under         0.000010 seconds        0.000684 seconds 
+00.10% obs's under         0.000010 seconds        0.000858 seconds 
+01.00% obs's under         0.000010 seconds        0.000918 seconds 
+20.00% obs's under         0.000010 seconds        0.001011 seconds 
+50.00% obs's under         0.000010 seconds        0.001172 seconds 
+66.67% obs's under         0.000010 seconds        0.001178 seconds 
+80.00% obs's under         0.000010 seconds        0.001946 seconds 
+95.00% obs's under         0.000010 seconds        0.002053 seconds 
+99.00% obs's under         0.000011 seconds        0.002133 seconds 
+99.90% obs's under         0.000017 seconds        0.002186 seconds 
+99.99% obs's under         0.000023 seconds        0.003108 seconds 
+-------------------------------------------------------------------
+  CDF DIFFERENCES          -- sleep_ns() --        --- sleep() ---         
+00.01% diff's under        0.000000 seconds        0.000674 seconds 
+00.10% diff's under        0.000000 seconds        0.000848 seconds 
+01.00% diff's under        0.000000 seconds        0.000908 seconds 
+20.00% diff's under        0.000000 seconds        0.001001 seconds 
+50.00% diff's under        0.000000 seconds        0.001162 seconds 
+66.67% diff's under        0.000000 seconds        0.001168 seconds 
+80.00% diff's under        0.000000 seconds        0.001936 seconds 
+95.00% diff's under        0.000000 seconds        0.002043 seconds 
+99.00% diff's under        0.000001 seconds        0.002123 seconds 
+99.90% diff's under        0.000007 seconds        0.002176 seconds 
+99.99% diff's under        0.000013 seconds        0.003098 seconds 
+-------------------------------------------------------------------
+Simulation time       =>   0.200000 seconds
+Number of iterations  =>   20000 
+Specified sleep time  =>   0.000010 seconds
+CPU load [one core]   =>  29.000000 percent
+-------------------------------------------------------------------
+
+===================================================================
+    STATISTIC              -- sleep_ns() --        --- sleep() ---         
+Specified sleep_time --    0.000005 seconds        0.000005 seconds 
+Mean sleep ------------    0.000005 seconds        0.001351 seconds 
+Maximum sleep ---------    0.000048 seconds        0.002226 seconds 
+Minimum sleep ---------    0.000005 seconds        0.000778 seconds 
+Mean difference -------    0.000000 seconds        0.001346 seconds 
+Maximum difference ----    0.000043 seconds        0.002221 seconds 
+-------------------------------------------------------------------
+  CDF OBSERVATIONS        -- sleep_ns() --        --- sleep() ---         
+00.01% obs's under         0.000005 seconds        0.000830 seconds 
+00.10% obs's under         0.000005 seconds        0.000867 seconds 
+01.00% obs's under         0.000005 seconds        0.000914 seconds 
+20.00% obs's under         0.000005 seconds        0.001012 seconds 
+50.00% obs's under         0.000005 seconds        0.001168 seconds 
+66.67% obs's under         0.000005 seconds        0.001180 seconds 
+80.00% obs's under         0.000005 seconds        0.001956 seconds 
+95.00% obs's under         0.000005 seconds        0.002056 seconds 
+99.00% obs's under         0.000008 seconds        0.002131 seconds 
+99.90% obs's under         0.000014 seconds        0.002184 seconds 
+99.99% obs's under         0.000028 seconds        0.002208 seconds 
+-------------------------------------------------------------------
+  CDF DIFFERENCES          -- sleep_ns() --        --- sleep() ---         
+00.01% diff's under        0.000000 seconds        0.000825 seconds 
+00.10% diff's under        0.000000 seconds        0.000862 seconds 
+01.00% diff's under        0.000000 seconds        0.000909 seconds 
+20.00% diff's under        0.000000 seconds        0.001007 seconds 
+50.00% diff's under        0.000000 seconds        0.001163 seconds 
+66.67% diff's under        0.000000 seconds        0.001175 seconds 
+80.00% diff's under        0.000000 seconds        0.001951 seconds 
+95.00% diff's under        0.000000 seconds        0.002051 seconds 
+99.00% diff's under        0.000003 seconds        0.002126 seconds 
+99.90% diff's under        0.000009 seconds        0.002179 seconds 
+99.99% diff's under        0.000023 seconds        0.002203 seconds 
+-------------------------------------------------------------------
+Simulation time       =>   0.100000 seconds
+Number of iterations  =>   20000 
+Specified sleep time  =>   0.000005 seconds
+CPU load [one core]   =>  29.000000 percent
+-------------------------------------------------------------------
 
