@@ -136,6 +136,14 @@ sleep_time   |        cpu load
   .0025 secs |        22.0 %
   .0023 secs |        29.0 %
   .0020 secs |        29.0 %
+
+
+-----------
+### Importance of warm_up operations
+```
+Julia is very sensitive to warming up functions for maximum performance
+
+```
   
   
  
