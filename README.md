@@ -139,10 +139,14 @@ sleep_time   |        cpu load
 
 
 -----------
-### Importance of warm_up operations
+### Importance of warm up operations
 ```
 Julia is very sensitive to warming up functions for maximum performance
-
+  small_time = .005
+  sleep_ns(small_time)  #--warm up sleep_ns itself
+  function master_sleeper()
+    return
+  end  
 ```
   
   
