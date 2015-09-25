@@ -154,9 +154,7 @@ sleep_time   |        cpu load
    * runs all sorts of sample sleep stuff to show sleep_ns in action
  * 
 
-***The sleep_ns.jl file is comprised of:***
-* sleep_ns()   #--- just the sleep_ns() ready to cut a paste into your app
-* 
+
 
 ## To-Do
 * learn how to use GitHub to create a Julia package
