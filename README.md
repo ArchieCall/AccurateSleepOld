@@ -73,15 +73,7 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 ----------
 ## Use cases
 * use sleep_ns() whenever sleep() is not accurate enough for your purposes
-* any application where a process must start and end on a precise schedule is suitable for sleep_ns()
-* for example
-  * desire some process to run exactly .080000 seconds
-  * start of process
-  * beg_nano = time_ns()
-  * some intermediate code is here
-  * int_nano = time_ns()
-  * end_nano = 
-  * 
+* call a function on a precise interval
 * 
 
 -------------
@@ -158,12 +150,16 @@ Julia is very sensitive to warming up functions for maximum performance
    * simple_compare() function
    * detail_compare() function
    * ten_sleeps() function
+   * interval_function_caller function
+   * do_something function
  * module Mainline
    * import NewSleep.sleep_ns
    * import NewSleep.simple_compare
    * import NewSleep.detail_compare
    * import NewSleep.ten_sleeps
-   * runs all sorts of sample sleep stuff to show sleep_ns in action
+   * import NewSleep.interval_function_caller
+   * import NewSleep.do_something
+   * runs examples showing sleep_ns in action
  * 
 
 
