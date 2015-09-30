@@ -165,6 +165,7 @@ Julia is very sensitive to warming up functions for maximum performance
 
 
 ## To-Do
-* learn how to use GitHub to create a Julia package
-* create a Julia package for AccurateSleep
+* learn enough GitHub commands to create registered Julia package
+* create AccurateSleep as a registered package
+* check out whether time_ns() dramatically affects number of while cycles when burning
 * investigate C instructions that are NOP and take up time but not CPU load
