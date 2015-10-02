@@ -2,7 +2,8 @@
 ```
 A package that provides an alternative sleep function:  sleep_ns().
 
-This function is very similiar to the normal Julia sleep() function, albeit with much improved accuracy.
+This function is very similiar to the normal Julia sleep() function,
+albeit with much improved accuracy.
 
 The sleep_ns() function has an average error rate of .000001 seconds,
 with only 5% of the errors exceeding .000002 seconds
@@ -133,12 +134,8 @@ sleep_time   |        cpu load
 -----------
 ### Importance of warm up operations
 ```
-Julia is very sensitive to warming up functions for maximum performance
-  small_time = .005
-  sleep_ns(small_time)  #--warm up sleep_ns itself
-  function master_sleeper()
-    return
-  end  
+sleep_ns() and other functions calling sleep_ns() should be warmed up for accurate sleeping
+  
 ```
   
   
@@ -162,6 +159,16 @@ Julia is very sensitive to warming up functions for maximum performance
    * runs examples showing sleep_ns in action
  * 
 
+## Possible use of sleep_ns in parallel operation
+```
+  There are areas of parallel operations that use polling.
+  
+  I have examined some of these and it seems that the poll timing is only accurate
+  to about 1.5 milliseconds which is similiar to sleep().
+  
+  Potentially some of this polling or waiting could be augmented with sleep_ns().
+  Of course, such a revision would need to be weighed against increased CPU loading!
+```
 
 
 ## To-Do
