@@ -76,6 +76,7 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 * use sleep_ns() whenever sleep() is not accurate enough for your purposes
 * call a function on a precise interval
 * syncrhonize some action to a real time process or clock
+* produce timestamps or tokens on some frequency
 * 
 
 -------------
