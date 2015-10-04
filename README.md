@@ -145,10 +145,14 @@ sleep_ns() and other functions calling sleep_ns() should be warmed up for accura
 ```
 complimentary function to sleep_ns
 ```
-
 ***simple_compare()***
 ```
 compares sleep() and sleep_ns for only one sleep_time
+```
+***detail_compare()***
+```
+compares sleep() and sleep_ns for multple sleep_time's
+produces probability density function & cumulative density functions
 ```
  
  
