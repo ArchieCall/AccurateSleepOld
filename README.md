@@ -154,7 +154,10 @@ compares sleep() and sleep_ns for only one sleep_time
 compares sleep() and sleep_ns for multple sleep_time's
 produces probability density function & cumulative density functions
 ```
- 
+***six_sleeps()***
+```
+performs six calls to sleep_ns() using a graded series of sleep_times's
+``` 
  
  ***The AccurateSleep.jl is comprised of the following:***
  * module NewSleep
