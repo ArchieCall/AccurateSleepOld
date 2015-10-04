@@ -143,7 +143,9 @@ sleep_ns() and other functions calling sleep_ns() should be warmed up for accura
 ### Functions 
 ***sleep_ns()***
 ```
-complimentary function to sleep_ns
+stand alone function that performs a hybrid sleep
+uses a combination of standard sleep() and final burn cycle
+does not depand on any Packages and uses 100% julia code
 ```
 ***simple_compare()***
 ```
