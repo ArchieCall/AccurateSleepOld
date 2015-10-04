@@ -139,13 +139,14 @@ sleep_time   |        cpu load
 sleep_ns() and other functions calling sleep_ns() should be warmed up for accurate sleeping
   
 ```
-  
-### sleep_ns()
+---------------  
+### Functions 
+***sleep_ns()***
 ```
 complimentary function to sleep_ns
 ```
 
-### simple_compare()
+***simple_compare()***
 ```
 compares sleep() and sleep_ns for only one sleep_time
 ```
