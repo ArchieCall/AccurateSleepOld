@@ -140,7 +140,15 @@ sleep_ns() and other functions calling sleep_ns() should be warmed up for accura
   
 ```
   
-  
+### sleep_ns()
+```
+complimentary function to sleep_ns
+```
+
+### simple_compare()
+```
+compares sleep() and sleep_ns for only one sleep_time
+```
  
  
  ***The AccurateSleep.jl is comprised of the following:***
