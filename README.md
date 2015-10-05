@@ -80,20 +80,19 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 * 
 
 -------------
-
-
 ## How sleep_ns() works 
   * the actual sleep time of sleep() was examined
-  * the actual time was always greater than the specified time
-  * the average error of the sleep was about .00150 second
+  * the time slept is always greater than the specified time
+  * average error of the sleep is about .00150 second
   * 99+% of the errors were found to be less than .00230 seconds
-  * a constant called burn_time is set to .00230 seconds
-  * let us sample a specific sleep_time say .00800 seconds
+  * a constant called burn_time is defined: const burn_time = .00230  #-- in seconds
+  * let us produce a sleep_time of .00800 seconds
   * the call to the function is:  sleep_ns(.00800)
-  * the function now subtracts off the burn_time yielding a partial_sleep_time of .00570 seconds
-  * a nano second time taken with time_ns() is put in var nano1
-  * a new var called nano_final is computed to be nano1 + (sleep_time * 1_000_000_000)
-  * sleep itself is called with:  sleep(partial_sleep_time)
+  * the function initially subtracts off the burn_time as follows:
+  *   partial_sleep_time = .00800 - partial_sleep_time - burn_time  #-- computes to .00570 seconds
+  *   sleep(partial_sleep_time)  #--sleeps off .00570 sec
+  * a nano second time taken with: nano1 = time_ns()
+  * asleep itself is called with:  sleep(partial_sleep_time)
   * when this sleep is done the actual time elapsed will almost always be between .00570 seconds and .00800 seconds
   * if the elapsed time is greater than or = to .00800, then sleep_ns() is done
   * if the elapsed time is less than .00800 then a burn cycle is required
