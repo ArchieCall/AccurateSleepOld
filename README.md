@@ -96,8 +96,8 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
   * if the elapsed time is greater than or = to .00800, then sleep_ns() is done
   * if the elapsed time is less than .00800 then a burn cycle is required
   * burn cycle is a simple while loop that
-    * takes a second time_ns() called nano2
-    * computes of elapsed time by: delta = (nano2 - nano1) / 1_000_000_000.
+    * takes a current nanosecond time:  nano2 = time_ns()
+    * computes of elapsed time: delta = (nano2 - nano1) / 1_000_000_000.
     * if delta exceeds .00800 then, sleep_ns() is done
   * delta returned in the return statement 
   
