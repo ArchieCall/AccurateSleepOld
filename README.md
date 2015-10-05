@@ -81,23 +81,24 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 
 -------------
 ## How sleep_ns() works 
-  * the actual sleep time of sleep() was examined
-  * the time slept is always greater than the specified time
-  * average error of the sleep is about .00150 second
-  * 99+% of the errors were found to be less than .00230 seconds
-  * a constant called burn_time is defined: const burn_time = .00230  #-- in seconds
-  * let us produce a sleep_time of .00800 seconds
+  * upon examining sleep()
+    * the time slept is always greater than the specified time
+    * average error of the sleep is about .00150 second
+    * 99+% of the errors were found to be less than .00230 seconds
+  * a constant is defined: const burn_time = .00230  #-- in seconds
+  * assume a sleep_time of .00800 seconds
   * the call to the function is:  sleep_ns(.00800)
+  * an initial nanosecond time taken: nano1 = time_ns()
   * the function initially subtracts off the burn_time as follows:
-  *   partial_sleep_time = .00800 - partial_sleep_time - burn_time  #-- computes to .00570 seconds
+  *   partial_sleep_time = .00800 - burn_time  #-- computes to .00570 seconds
   *   sleep(partial_sleep_time)  #--sleeps off .00570 sec
-  * a nano second time taken with: nano1 = time_ns()
-  * asleep itself is called with:  sleep(partial_sleep_time)
   * when this sleep is done the actual time elapsed will almost always be between .00570 seconds and .00800 seconds
   * if the elapsed time is greater than or = to .00800, then sleep_ns() is done
   * if the elapsed time is less than .00800 then a burn cycle is required
-  * the burn cycle is a simple while loop that takes a second time_ns() called nano2
-  * in the while loop when nano2 equals or exceeds nanofinal, then sleep_ns() is done
+  * burn cycle is a simple while loop that
+    * takes a second time_ns() called nano2
+    * computes of elapsed time by: delta = (nano2 - nano1) / 1_000_000_000.
+    * if delta exceeds .00800 then, sleep_ns() is done
   * delta returned in the return statement 
   
 ## CPU loading when using sleep_ns
