@@ -192,5 +192,4 @@ performs six calls to sleep_ns() using a graded series of sleep_times's
 ## To-Do
 * learn enough GitHub commands to create registered Julia package
 * create AccurateSleep as a registered package
-* check out whether time_ns() dramatically affects number of while cycles when burning
-* investigate C instructions that are NOP and take up time but not CPU load
+* investigate C instructions that are NOP and take up predictable time but not CPU load??
