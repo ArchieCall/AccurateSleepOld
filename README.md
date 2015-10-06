@@ -77,7 +77,6 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
 * call a function on a precise interval
 * syncrhonize some action to a real time process or clock
 * produce timestamps or tokens on some frequency
-* 
 
 -------------
 ## How sleep_ns() works 
@@ -96,16 +95,15 @@ Mean sleep DIFF        |  .001343 secs           |  .000002 secs
   * if the elapsed time is greater than or = to .00800, then sleep_ns() is done
   * if the elapsed time is less than .00800 then a burn cycle is required
   * burn cycle is a simple while loop that
-    * takes a current nanosecond time:  nano2 = time_ns()
-    * computes of elapsed time: delta = (nano2 - nano1) / 1_000_000_000.
-    * if delta exceeds .00800 then, sleep_ns() is done
-  * delta returned in the return statement 
+    * computes elapsed time: delta = (time_ns() - nano1) / 1_000_000_000.
+    * if delta equal or exceeds .00800 then, sleep_ns() is done
+  * delta returned is returned 
   
 ## CPU loading when using sleep_ns
 * the sleep(partial_sleep_time) portion of sleep_ns() has zero impact on loading
 * the burn cycle of sleep_ns() has an impact on cpu loading
 * on my Windows 10 Core i5 laptop running Julia 3.11, I found that the burn cycle maxed out at 29% CPU loading
-  * the 29% loading on my computer is predicated on the number of cores and the standard setting on Windows 10
+  * the 29% loading on my computer is predicated on the number of cores and the standard settings on Windows 10
   * if the Affinity and Priority were revised for sleep_ns(), then the loading might be mitigated somewhat
   * I'm not familiar with how Linux handles such matters, but anything that throttles a process would be of benefit
 * the burn_time threshold of .00230 seconds defines where burning begins
