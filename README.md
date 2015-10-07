@@ -135,7 +135,15 @@ sleep_time   |        cpu load
 ### Importance of warm up operations
 ```
 sleep_ns() and other functions calling sleep_ns() should be warmed up for accurate sleeping
-  
+```
+------------------------
+### sleep() allocates an additional 392 bytes for each call
+```
+The standard julia sleep() function incrmentally adds 392 bytes each time it is called.
+I do not know the reason why? Possibly it is part and parcel of the ccall operation!
+
+Since sleep-ns() makes use of sleep(), this extra alloction follows thru to each sleep_ns() call
+whenever the sleep_time is in excess of .0023000 seconds.
 ```
 ---------------  
 ### Functions 
